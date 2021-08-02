@@ -5,11 +5,9 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment.Companion.TopCenter
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -61,8 +59,7 @@ fun AlbumsArt(
     Image(
         painter = imagePainter,
         contentDescription = data.toString(),
-        modifier = modifier.clip(shape),
-        alignment = TopCenter
+        modifier = modifier.clip(shape)
     )
 }
 

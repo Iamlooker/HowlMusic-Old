@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.looker.howlmusic.ui.AlbumsArt
@@ -61,8 +62,7 @@ fun AlbumDetailHeader(
                 data = albumArt,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(0.dp, 25.dp)
-                    .background(color)
+                    .fillMaxHeight(0.4f)
             ) {
                 color = it
             }
