@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.HowlMusic" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/orange_dark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/sky_dark</item>
+        <item name="android:colorBackground">@color/black_grey</item>
+        <item name="colorOnBackground">@color/grey</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?android:attr/colorBackground</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>
