@@ -52,9 +52,19 @@ fun AlbumDetailHeader(
         visibleState = composeAnimation,
         enter = fadeIn(initialAlpha = 0f, animationSpec = tween(durationMillis = 500)) + expandIn()
     ) {
+        Box(modifier = Modifier.fillMaxSize()
+            .background(
+                Brush.verticalGradient(
+                    listOf(
+                        color,
+                        Color.Transparent
+                    )
+                )
+            ))
         Column(
             Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(20.dp),
             horizontalAlignment = CenterHorizontally
         ) {
 

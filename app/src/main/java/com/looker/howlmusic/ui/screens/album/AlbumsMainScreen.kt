@@ -7,9 +7,10 @@ import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
@@ -48,13 +49,17 @@ fun AlbumsItem(
     onClick: () -> Unit,
 ) {
 
-    val cardWidth =
+    var cardColor by remember{
+        mutableStateOf(Color.Transparent)
+    }
+    val albumArtWidth =
         (LocalContext.current.resources.displayMetrics.widthPixels / 2).dp / LocalDensity.current.density - 20.dp
 
     Card(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight(),
+        backgroundColor = cardColor
     ) {
         Column(
             modifier = Modifier.clickable { onClick() },
@@ -62,8 +67,10 @@ fun AlbumsItem(
         ) {
             AlbumsArt(
                 data = album.albumArtUri,
-                modifier = Modifier.size(cardWidth)
-            )
+                modifier = Modifier.size(albumArtWidth)
+            ){
+                cardColor = it
+            }
             HeaderText(
                 text = album.albumName
             )
