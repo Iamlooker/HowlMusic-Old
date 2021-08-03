@@ -29,16 +29,21 @@ fun AlbumsArt(
     shape: CornerBasedShape = MaterialTheme.shapes.medium,
     useColor: (Color) -> Unit = {},
 ) {
+
     val defaultColor = MaterialTheme.colors.surface
+
     var dominantColor by remember {
         mutableStateOf(defaultColor)
     }
+
+
     val context = LocalContext.current
 
     val imageLoader = ImageLoader(context)
 
     val request = ImageRequest.Builder(context)
         .data(data = data)
+        .crossfade(1000)
         .build()
 
     val imagePainter = rememberImagePainter(
