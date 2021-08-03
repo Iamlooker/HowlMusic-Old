@@ -51,6 +51,8 @@ dependencies {
 
     //Accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.15.0")
+    implementation("com.google.accompanist:accompanist-insets:0.15.0")
+    implementation("com.google.accompanist:accompanist-insets-ui:0.15.0")
 
     //Coil
     implementation("io.coil-kt:coil-compose:1.3.1")
