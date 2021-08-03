@@ -69,7 +69,7 @@ fun AlbumDetailHeader(
                 data = albumArt,
                 modifier = Modifier.padding(20.dp)
             ) {
-                color = it
+                color = it.copy(0.4f)
             }
             HeaderText(
                 text = albumName,

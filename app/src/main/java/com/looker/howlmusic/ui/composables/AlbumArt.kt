@@ -55,7 +55,7 @@ fun AlbumsArt(
             val result = (imageLoader.execute(request)).drawable
 
             if (result != null) {
-                dominantColor = result.calcDominantColor().copy(0.4f)
+                dominantColor = result.calcDominantColor()
             }
             useColor(dominantColor)
         }
