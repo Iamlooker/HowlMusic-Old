@@ -69,7 +69,7 @@ fun AlbumsItem(
                 data = album.albumArtUri,
                 modifier = Modifier.size(albumArtWidth)
             ) {
-                cardColor = it
+                cardColor = it.copy(0.4f)
             }
             HeaderText(
                 text = album.albumName
