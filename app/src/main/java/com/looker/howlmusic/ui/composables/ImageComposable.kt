@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
-fun AlbumsArt(
+fun ImageComp(
     modifier: Modifier = Modifier,
     data: Uri?,
     shape: CornerBasedShape = MaterialTheme.shapes.medium,
@@ -60,12 +60,12 @@ fun AlbumsArt(
         }
     }
 
-    AlbumArtMain(modifier = modifier.clip(shape), painter = imagePainter)
+    ImageCompMain(modifier = modifier.clip(shape), painter = imagePainter)
 
 }
 
 @Composable
-fun AlbumArtMain(
+fun ImageCompMain(
     modifier: Modifier = Modifier,
     painter: Painter,
 ) {

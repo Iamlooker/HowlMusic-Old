@@ -19,9 +19,9 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.looker.howlmusic.model.Song
-import com.looker.howlmusic.ui.composables.AlbumsArt
 import com.looker.howlmusic.ui.composables.BodyText
 import com.looker.howlmusic.ui.composables.HeaderText
+import com.looker.howlmusic.ui.composables.ImageComp
 import com.looker.howlmusic.ui.theme.Orange
 
 @Composable
@@ -64,7 +64,7 @@ fun SongsItem(
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            AlbumsArt(
+            ImageComp(
                 data = song.albumArtUri,
                 modifier = Modifier.size(cardHeight),
                 shape = MaterialTheme.shapes.small

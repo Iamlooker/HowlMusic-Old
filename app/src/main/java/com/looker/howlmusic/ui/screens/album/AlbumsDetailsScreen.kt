@@ -16,9 +16,9 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.statusBarsHeight
-import com.looker.howlmusic.ui.composables.AlbumsArt
 import com.looker.howlmusic.ui.composables.BodyText
 import com.looker.howlmusic.ui.composables.HeaderText
+import com.looker.howlmusic.ui.composables.ImageComp
 import com.looker.howlmusic.ui.theme.Typography
 import com.looker.howlmusic.utils.Constants.artworkUri
 
@@ -89,7 +89,7 @@ fun AlbumDetailHeader(
             horizontalAlignment = CenterHorizontally
         ) {
 
-            AlbumsArt(
+            ImageComp(
                 data = albumArt,
                 modifier = Modifier.padding(20.dp)
             ) {

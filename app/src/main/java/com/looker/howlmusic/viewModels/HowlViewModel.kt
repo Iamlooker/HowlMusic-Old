@@ -10,11 +10,10 @@ import com.looker.howlmusic.R
 
 class HowlViewModel : ViewModel() {
 
-    val text: MutableState<String> = mutableStateOf("Grant Permission")
+    val buttonText: MutableState<String> = mutableStateOf("Grant Permission")
 
-    val icon: MutableState<ImageVector> = mutableStateOf(Icons.Default.Close)
+    val buttonIcon: MutableState<ImageVector> = mutableStateOf(Icons.Default.Close)
 
-    val color: MutableState<Int> = mutableStateOf(R.color.orange)
+    val buttonColor: MutableState<Int> = mutableStateOf(R.color.orange)
 
-    val enabled: MutableState<Boolean> = mutableStateOf(true)
 }

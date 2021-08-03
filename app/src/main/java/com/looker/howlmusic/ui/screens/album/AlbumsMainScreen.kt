@@ -21,9 +21,9 @@ import androidx.navigation.NavController
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.looker.howlmusic.model.Album
-import com.looker.howlmusic.ui.composables.AlbumsArt
 import com.looker.howlmusic.ui.composables.BodyText
 import com.looker.howlmusic.ui.composables.HeaderText
+import com.looker.howlmusic.ui.composables.ImageComp
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -78,7 +78,7 @@ fun AlbumsItem(
                 .background(cardColor.copy(0.4f)),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AlbumsArt(
+            ImageComp(
                 data = album.albumArtUri,
                 modifier = Modifier.size(albumArtWidth)
             ) {
