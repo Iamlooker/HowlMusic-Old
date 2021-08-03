@@ -1,12 +1,15 @@
 package com.looker.howlmusic.ui.screens.album
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,18 +61,23 @@ fun AlbumsItem(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight(),
-        backgroundColor = cardColor
+            .wrapContentHeight()
     ) {
         Column(
-            modifier = Modifier.clickable { onClick() },
+            modifier = Modifier
+                .clickable(
+                    onClick = onClick,
+                    indication = rememberRipple( color = cardColor.copy(0.2f) ),
+                    interactionSource = remember { MutableInteractionSource() }
+                )
+                .background(cardColor.copy(0.4f)),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AlbumsArt(
                 data = album.albumArtUri,
                 modifier = Modifier.size(albumArtWidth)
             ) {
-                cardColor = it.copy(0.4f)
+                cardColor = it
             }
             HeaderText(
                 text = album.albumName

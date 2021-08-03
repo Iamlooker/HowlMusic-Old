@@ -3,12 +3,14 @@ package com.looker.howlmusic.ui.screens.song
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.Composable
+import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -18,6 +20,7 @@ import com.looker.howlmusic.model.Song
 import com.looker.howlmusic.ui.composables.AlbumsArt
 import com.looker.howlmusic.ui.composables.BodyText
 import com.looker.howlmusic.ui.composables.HeaderText
+import com.looker.howlmusic.ui.theme.Orange
 
 @Composable
 fun SongsList(songsList: MutableList<Song>) {
@@ -36,14 +39,21 @@ fun SongsItem(
     val cardHeight =
         (LocalContext.current.resources.displayMetrics.heightPixels / 12).dp / LocalDensity.current.density
 
+    var rippleColor by remember { mutableStateOf(Orange) }
+
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = MaterialTheme.shapes.small
+        shape = MaterialTheme.shapes.small,
+        elevation = 0.dp
     ) {
         Row(
             Modifier
                 .background(MaterialTheme.colors.background)
-                .clickable { Log.e("Click", "${song.albumArtUri}") },
+                .clickable(
+                    onClick = { Log.e("Click", "${song.albumArtUri}") },
+                    indication = rememberRipple(color = rippleColor),
+                    interactionSource = remember { MutableInteractionSource() }
+                ),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -51,7 +61,9 @@ fun SongsItem(
                 data = song.albumArtUri,
                 modifier = Modifier.size(cardHeight),
                 shape = MaterialTheme.shapes.small
-            )
+            ) {
+                rippleColor = it
+            }
             Column {
                 HeaderText(
                     text = song.songName
@@ -61,5 +73,6 @@ fun SongsItem(
                 )
             }
         }
+
     }
 }

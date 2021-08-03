@@ -11,7 +11,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.palette.graphics.Palette
@@ -68,24 +67,22 @@ fun AlbumsArt(
 @Composable
 fun AlbumArtMain(
     modifier: Modifier = Modifier,
-    painter: Painter
+    painter: Painter,
 ) {
-
     Image(
         modifier = modifier,
         painter = painter,
         contentDescription = null
     )
-
 }
 
-private suspend fun Drawable.calcDominantColor(): Color =
+private suspend fun Drawable.calcDominantColor() =
     withContext(Dispatchers.IO) {
         val bmp =
             (this@calcDominantColor as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true)
-        val vibrant: Int = Palette
+        val vibrant = Palette
             .from(bmp)
             .generate()
-            .getVibrantColor(0)
+            .getDarkVibrantColor(0)
         Color(vibrant)
     }
