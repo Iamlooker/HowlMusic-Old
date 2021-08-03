@@ -38,15 +38,16 @@ fun OnBoardingPage(
 
     val enabled = viewModel.enabled.value
 
-    val launcher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission()) {
-            if (it) {
-                viewModel.enabled.value = !it
-                viewModel.text.value = "Granted"
-                viewModel.icon.value = Icons.Default.Done
-                viewModel.color.value = R.color.green
-            }
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) {
+        if (it) {
+            viewModel.enabled.value = !it
+            viewModel.text.value = "Granted"
+            viewModel.icon.value = Icons.Default.Done
+            viewModel.color.value = R.color.green
         }
+    }
 
     Surface(
         color = MaterialTheme.colors.background,
