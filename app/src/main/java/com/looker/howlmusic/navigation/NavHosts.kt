@@ -6,12 +6,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
-import androidx.navigation.compose.rememberNavController
 import com.looker.howlmusic.model.Album
 import com.looker.howlmusic.model.Song
 import com.looker.howlmusic.ui.screens.album.AlbumsList
 import com.looker.howlmusic.ui.screens.album.DetailsMain
-import com.looker.howlmusic.ui.screens.onboard.OnBoardingPage
 import com.looker.howlmusic.ui.screens.song.SongsList
 
 @Composable
@@ -62,9 +60,8 @@ fun BottomNavHost(
 @Composable
 fun AlbumsNavHost(
     albumsList: MutableList<Album>,
+    navController: NavHostController,
 ) {
-    val navController = rememberNavController()
-
     NavHost(
         navController = navController,
         startDestination = AlbumsScreens.AlbumsMain.route
