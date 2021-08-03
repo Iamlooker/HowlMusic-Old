@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.looker.howlmusic.ui.AlbumsArt
+import com.looker.howlmusic.ui.composables.AlbumsArt
 import com.looker.howlmusic.ui.composables.BodyText
 import com.looker.howlmusic.ui.composables.HeaderText
 import com.looker.howlmusic.ui.theme.Typography
@@ -52,7 +52,8 @@ fun AlbumDetailHeader(
         visibleState = composeAnimation,
         enter = fadeIn(initialAlpha = 0f, animationSpec = tween(durationMillis = 500)) + expandIn()
     ) {
-        Box(modifier = Modifier.fillMaxSize()
+        Box(modifier = Modifier
+            .fillMaxSize()
             .background(
                 Brush.verticalGradient(
                     listOf(

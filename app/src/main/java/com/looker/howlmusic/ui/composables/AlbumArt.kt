@@ -1,4 +1,4 @@
-package com.looker.howlmusic.ui
+package com.looker.howlmusic.ui.composables
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -11,21 +11,23 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.palette.graphics.Palette
 import coil.ImageLoader
 import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
-import coil.transform.RoundedCornersTransformation
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @Composable
 fun AlbumsArt(
     modifier: Modifier = Modifier,
     data: Uri?,
     shape: CornerBasedShape = MaterialTheme.shapes.medium,
-    content: (Color) -> Unit = {},
+    useColor: (Color) -> Unit = {},
 ) {
     val defaultColor = MaterialTheme.colors.surface
     var dominantColor by remember {
@@ -36,7 +38,6 @@ fun AlbumsArt(
     val imageLoader = ImageLoader(context)
 
     val request = ImageRequest.Builder(context)
-        .transformations(RoundedCornersTransformation(12.dp.value))
         .data(data = data)
         .build()
 
@@ -52,23 +53,36 @@ fun AlbumsArt(
             if (result != null) {
                 dominantColor = result.calcDominantColor().copy(0.4f)
             }
-            content(dominantColor)
+            useColor(dominantColor)
         }
     }
 
+    AlbumArtMain(modifier = modifier, painter = imagePainter, shape = shape)
+
+}
+
+@Composable
+fun AlbumArtMain(
+    modifier: Modifier = Modifier,
+    painter: Painter,
+    shape: Shape,
+) {
+
     Image(
-        painter = imagePainter,
-        contentDescription = data.toString(),
+        painter = painter,
+        contentDescription = null,
         modifier = modifier.clip(shape)
     )
+
 }
 
-
-fun Drawable.calcDominantColor(): Color {
-    val bmp = (this as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true)
-    val vibrant: Int = Palette
-        .from(bmp)
-        .generate()
-        .getVibrantColor(0)
-    return Color(vibrant)
-}
+private suspend fun Drawable.calcDominantColor(): Color =
+    withContext(Dispatchers.IO) {
+        val bmp =
+            (this@calcDominantColor as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true)
+        val vibrant: Int = Palette
+            .from(bmp)
+            .generate()
+            .getVibrantColor(0)
+        Color(vibrant)
+    }

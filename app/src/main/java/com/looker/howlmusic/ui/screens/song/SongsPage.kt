@@ -15,7 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import com.looker.howlmusic.model.Song
-import com.looker.howlmusic.ui.AlbumsArt
+import com.looker.howlmusic.ui.composables.AlbumsArt
 import com.looker.howlmusic.ui.composables.BodyText
 import com.looker.howlmusic.ui.composables.HeaderText
 

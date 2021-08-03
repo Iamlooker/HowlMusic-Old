@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.looker.howlmusic.model.Album
-import com.looker.howlmusic.ui.AlbumsArt
+import com.looker.howlmusic.ui.composables.AlbumsArt
 import com.looker.howlmusic.ui.composables.BodyText
 import com.looker.howlmusic.ui.composables.HeaderText
 
@@ -46,10 +46,10 @@ fun AlbumsList(
 fun AlbumsItem(
     album: Album,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
 
-    var cardColor by remember{
+    var cardColor by remember {
         mutableStateOf(Color.Transparent)
     }
     val albumArtWidth =
@@ -68,7 +68,7 @@ fun AlbumsItem(
             AlbumsArt(
                 data = album.albumArtUri,
                 modifier = Modifier.size(albumArtWidth)
-            ){
+            ) {
                 cardColor = it
             }
             HeaderText(
