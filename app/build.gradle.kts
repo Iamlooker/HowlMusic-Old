@@ -75,6 +75,10 @@ dependencies {
     //Palette
     implementation("androidx.palette:palette-ktx:1.0.0")
 
+    //Room
+    implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
+    annotationProcessor("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
+
     //UI
     implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
     implementation("androidx.compose.ui:ui-tooling:1.0.0")
