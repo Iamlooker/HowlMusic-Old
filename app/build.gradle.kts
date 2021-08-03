@@ -73,7 +73,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.4.0-alpha05")
 
     //Palette
-    implementation("androidx.palette:palette-ktx:1.0.0"))
+    implementation("androidx.palette:palette-ktx:1.0.0")
 
     //UI
     implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
