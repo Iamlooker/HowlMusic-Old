@@ -36,7 +36,6 @@ fun AlbumsArt(
         mutableStateOf(defaultColor)
     }
 
-
     val context = LocalContext.current
 
     val imageLoader = ImageLoader(context)
@@ -62,21 +61,20 @@ fun AlbumsArt(
         }
     }
 
-    AlbumArtMain(modifier = modifier, painter = imagePainter, shape = shape)
+    AlbumArtMain(modifier = modifier.clip(shape), painter = imagePainter)
 
 }
 
 @Composable
 fun AlbumArtMain(
     modifier: Modifier = Modifier,
-    painter: Painter,
-    shape: Shape,
+    painter: Painter
 ) {
 
     Image(
+        modifier = modifier,
         painter = painter,
-        contentDescription = null,
-        modifier = modifier.clip(shape)
+        contentDescription = null
     )
 
 }

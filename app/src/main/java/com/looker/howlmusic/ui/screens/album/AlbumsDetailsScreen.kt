@@ -1,12 +1,9 @@
 package com.looker.howlmusic.ui.screens.album
 
 import android.content.ContentUris
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.*
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandIn
-import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
@@ -61,19 +58,16 @@ fun AlbumDetailHeader(
                         Color.Transparent
                     )
                 )
-            ))
+            )
+        )
         Column(
-            Modifier
-                .fillMaxWidth()
-                .padding(20.dp),
+            Modifier.fillMaxWidth(),
             horizontalAlignment = CenterHorizontally
         ) {
 
             AlbumsArt(
                 data = albumArt,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.4f)
+                modifier = Modifier.padding(20.dp)
             ) {
                 color = it
             }

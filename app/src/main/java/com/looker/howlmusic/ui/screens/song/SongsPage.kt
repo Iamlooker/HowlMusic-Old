@@ -49,7 +49,8 @@ fun SongsItem(
         ) {
             AlbumsArt(
                 data = song.albumArtUri,
-                modifier = Modifier.size(cardHeight)
+                modifier = Modifier.size(cardHeight),
+                shape = MaterialTheme.shapes.small
             )
             Column {
                 HeaderText(
