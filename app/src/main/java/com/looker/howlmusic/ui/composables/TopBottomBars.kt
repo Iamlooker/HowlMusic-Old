@@ -1,14 +1,12 @@
 package com.looker.howlmusic.ui.composables
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -16,6 +14,8 @@ import com.looker.howlmusic.R
 import com.looker.howlmusic.navigation.Screens
 import com.looker.howlmusic.ui.theme.Typography
 
+
+//Unused for Time being
 @Composable
 fun TopAppBar() {
     TopAppBar(
@@ -38,7 +38,6 @@ fun BottomNavigation(navController: NavController, items: List<Screens>) {
     BottomNavigation(
         backgroundColor = MaterialTheme.colors.background,
         contentColor = MaterialTheme.colors.primary,
-        modifier = Modifier.height(60.dp)
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
