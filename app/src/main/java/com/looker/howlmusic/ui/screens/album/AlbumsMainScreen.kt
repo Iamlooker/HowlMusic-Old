@@ -46,7 +46,7 @@ fun AlbumsList(
 fun AlbumsItem(
     album: Album,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit,
+    onClick: () -> Unit
 ) {
 
     var cardColor by remember{
