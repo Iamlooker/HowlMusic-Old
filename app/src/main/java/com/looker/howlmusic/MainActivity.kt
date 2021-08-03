@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
+import com.google.accompanist.insets.ProvideWindowInsets
 import com.looker.howlmusic.data.AlbumsData
 import com.looker.howlmusic.data.SongsData
 import com.looker.howlmusic.model.Album
@@ -30,12 +32,16 @@ class MainActivity : ComponentActivity() {
 
 
         setContent {
-            DisplayWhat(
-                permissionGranted = permissionGranted,
-                albumsList = albums,
-                songsList = songs
-            )
+            ProvideWindowInsets {
+                DisplayWhat(
+                    permissionGranted = permissionGranted,
+                    albumsList = albums,
+                    songsList = songs
+                )
+            }
         }
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
     }
 }
 

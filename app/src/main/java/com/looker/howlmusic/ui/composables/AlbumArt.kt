@@ -83,6 +83,6 @@ private suspend fun Drawable.calcDominantColor() =
         val vibrant = Palette
             .from(bmp)
             .generate()
-            .getDarkVibrantColor(0)
+            .getVibrantColor(0)
         Color(vibrant)
     }

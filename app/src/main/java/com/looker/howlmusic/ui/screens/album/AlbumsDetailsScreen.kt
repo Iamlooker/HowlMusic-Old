@@ -1,9 +1,12 @@
 package com.looker.howlmusic.ui.screens.album
 
 import android.content.ContentUris
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandIn
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
@@ -12,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.insets.statusBarsHeight
 import com.looker.howlmusic.ui.composables.AlbumsArt
 import com.looker.howlmusic.ui.composables.BodyText
 import com.looker.howlmusic.ui.composables.HeaderText
@@ -24,44 +28,64 @@ fun DetailsMain(
     artistName: String?,
     albumId: Long,
 ) {
-    AlbumDetailHeader(albumName = albumName, artistName = artistName, albumId = albumId)
+    var backgroundGradient by remember {
+        mutableStateOf(Color.Transparent)
+    }
+    Column {
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .statusBarsHeight()
+                .background(backgroundGradient)
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .background(
+                    Brush.verticalGradient(
+                        listOf(
+                            backgroundGradient,
+                            Color.Transparent
+                        )
+                    )
+                )
+        ) {
+            AlbumDetailHeader(
+                albumName = albumName,
+                artistName = artistName,
+                albumId = albumId
+            ) { color ->
+                backgroundGradient = color.copy(0.4f)
+            }
+        }
+    }
+
 }
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AlbumDetailHeader(
+    modifier: Modifier = Modifier,
     albumName: String?,
     artistName: String?,
     albumId: Long,
+    content: (Color) -> Unit,
 ) {
 
     val albumArt = ContentUris.withAppendedId(artworkUri, albumId)
     val composeAnimation = MutableTransitionState(initialState = false).apply {
         targetState = true
     }
-    var color by remember {
-        mutableStateOf(
-            Color.Transparent
-        )
-    }
 
     AnimatedVisibility(
         visibleState = composeAnimation,
         enter = fadeIn(initialAlpha = 0f, animationSpec = tween(durationMillis = 500)) + expandIn()
     ) {
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    listOf(
-                        color,
-                        Color.Transparent
-                    )
-                )
-            )
-        )
         Column(
-            Modifier.fillMaxWidth(),
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.5f),
             horizontalAlignment = CenterHorizontally
         ) {
 
@@ -69,7 +93,7 @@ fun AlbumDetailHeader(
                 data = albumArt,
                 modifier = Modifier.padding(20.dp)
             ) {
-                color = it.copy(0.4f)
+                content(it)
             }
             HeaderText(
                 text = albumName,

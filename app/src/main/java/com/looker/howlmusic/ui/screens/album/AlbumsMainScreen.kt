@@ -18,6 +18,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.google.accompanist.insets.LocalWindowInsets
+import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.looker.howlmusic.model.Album
 import com.looker.howlmusic.ui.composables.AlbumsArt
 import com.looker.howlmusic.ui.composables.BodyText
@@ -32,7 +34,10 @@ fun AlbumsList(
 
     LazyVerticalGrid(
         cells = GridCells.Fixed(count = 2),
-        contentPadding = PaddingValues(bottom = 60.dp)
+        contentPadding = rememberInsetsPaddingValues(
+            insets = LocalWindowInsets.current.systemBars,
+            applyTop = true
+        )
     ) {
         items(albumsList) { album ->
             AlbumsItem(
@@ -67,7 +72,7 @@ fun AlbumsItem(
             modifier = Modifier
                 .clickable(
                     onClick = onClick,
-                    indication = rememberRipple( color = cardColor.copy(0.2f) ),
+                    indication = rememberRipple(color = cardColor.copy(0.2f)),
                     interactionSource = remember { MutableInteractionSource() }
                 )
                 .background(cardColor.copy(0.4f)),

@@ -16,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.insets.LocalWindowInsets
+import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.looker.howlmusic.model.Song
 import com.looker.howlmusic.ui.composables.AlbumsArt
 import com.looker.howlmusic.ui.composables.BodyText
@@ -24,7 +26,12 @@ import com.looker.howlmusic.ui.theme.Orange
 
 @Composable
 fun SongsList(songsList: MutableList<Song>) {
-    LazyColumn(contentPadding = PaddingValues(bottom = 60.dp)) {
+    LazyColumn(
+        contentPadding = rememberInsetsPaddingValues(
+            insets = LocalWindowInsets.current.systemBars,
+            applyTop = true
+        )
+    ) {
         items(songsList) { song ->
             SongsItem(song, modifier = Modifier.padding(10.dp))
         }
