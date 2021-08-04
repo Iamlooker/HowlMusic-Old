@@ -19,12 +19,11 @@ import com.looker.howlmusic.ui.home.HomeSections
 import com.looker.howlmusic.ui.home.addHomeGraph
 
 object MainDestinations {
-    const val ON_BOARD_ROUTE = "on_board"
     const val HOME_ROUTE = "home"
-    const val ALBUMS_DETAILS_ROUTE = "album_details"
-    const val ALBUM_ID = "album_id"
-    const val ALBUM_NAME = "album_name"
-    const val ARTIST_NAME = "artist_name"
+    const val ALBUMS_DETAILS_ROUTE = "albumsDetails"
+    const val ALBUM_ID = "albumId"
+    const val ALBUM_NAME = "albumName"
+    const val ARTIST_NAME = "artistName"
 }
 
 @Composable
@@ -43,22 +42,29 @@ fun HowlNavGraph(
             route = MainDestinations.HOME_ROUTE,
             startDestination = HomeSections.ALBUMS.route,
         ) {
-            addHomeGraph(navController)
+            addHomeGraph(
+                onAlbumClicked = { albumId, albumName, artistName, from: NavBackStackEntry ->
+                    if (from.lifecycleIsResumed()) {
+                        navController
+                            .navigate("${MainDestinations.ALBUMS_DETAILS_ROUTE}/$albumId/$albumName/$artistName")
+                    }
+                }
+            )
         }
 
         composable(
-            "${MainDestinations.ALBUMS_DETAILS_ROUTE}/{$ALBUM_NAME}/{$ARTIST_NAME}/{$ALBUM_ID}",
+            "${MainDestinations.ALBUMS_DETAILS_ROUTE}/{$ALBUM_ID}/{$ALBUM_NAME}/{$ARTIST_NAME}",
             arguments = listOf(
+                navArgument(ALBUM_ID) { type = NavType.LongType },
                 navArgument(ALBUM_NAME) { type = NavType.StringType },
                 navArgument(ARTIST_NAME) { type = NavType.StringType },
-                navArgument(ALBUM_ID) { type = NavType.LongType },
             )
         ) { backStackEntry ->
             val arguments = requireNotNull(backStackEntry.arguments)
             DetailsMain(
+                albumId = arguments.getLong(ALBUM_ID),
                 albumName = arguments.getString(ALBUM_NAME),
                 artistName = arguments.getString(ARTIST_NAME),
-                albumId = arguments.getLong(ALBUM_ID),
                 upPress = { navController.navigateUp() }
             )
         }

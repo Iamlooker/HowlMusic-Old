@@ -9,41 +9,39 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
-import com.looker.howlmusic.MainDestinations
 import com.looker.howlmusic.model.Album
 import com.looker.howlmusic.ui.components.AlbumsCard
 import com.looker.howlmusic.viewmodels.AlbumsViewModel
 
 @Composable
 fun Albums(
-    navController: NavController,
     viewModel: AlbumsViewModel = viewModel(),
+    onAlbumClick: (Long, String, String) -> Unit,
 ) {
     Albums(
-        navController = navController,
         albumsList = viewModel.albumsList,
-        columnCount = viewModel.albumsColumn
+        columnCount = viewModel.albumsColumn,
+        onAlbumClick = onAlbumClick
     )
 }
 
 @Composable
 private fun Albums(
-    navController: NavController,
     albumsList: MutableList<Album>,
     columnCount: Int,
+    onAlbumClick: (Long, String, String) -> Unit,
 ) {
-    AlbumsList(navController = navController, albumsList = albumsList, columnCount = columnCount)
+    AlbumsList(albumsList = albumsList, columnCount = columnCount, onAlbumClick = onAlbumClick)
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AlbumsList(
-    navController: NavController,
     albumsList: MutableList<Album>,
     columnCount: Int,
+    onAlbumClick: (Long, String, String) -> Unit,
 ) {
     LazyVerticalGrid(
         cells = GridCells.Fixed(count = columnCount),
@@ -56,10 +54,13 @@ fun AlbumsList(
             AlbumsCard(
                 album = album,
                 columnCount = columnCount,
-                modifier = Modifier.padding(10.dp)
-            ) {
-                navController.navigate("${MainDestinations.ALBUMS_DETAILS_ROUTE}/${album.albumName}/${album.artistName}/${album.albumId}")
-            }
+                modifier = Modifier.padding(10.dp),
+                onAlbumClick = onAlbumClick
+            )
+//            {
+//                onAlbumClick
+//                navController.navigate("${MainDestinations.ALBUMS_DETAILS_ROUTE}/${album.albumId}/${album.albumName}/${album.artistName}")
+//            }
         }
     }
 }

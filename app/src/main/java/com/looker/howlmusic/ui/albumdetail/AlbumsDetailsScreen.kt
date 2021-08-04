@@ -33,9 +33,9 @@ import com.looker.howlmusic.utils.Constants.artworkUri
 
 @Composable
 fun DetailsMain(
+    albumId: Long,
     albumName: String?,
     artistName: String?,
-    albumId: Long,
     upPress: () -> Unit = {},
 ) {
     var backgroundGradient by remember {
@@ -81,9 +81,9 @@ fun DetailsMain(
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AlbumDetailHeader(
+    albumId: Long,
     albumName: String?,
     artistName: String?,
-    albumId: Long,
     useColor: (Color) -> Unit,
 ) {
 

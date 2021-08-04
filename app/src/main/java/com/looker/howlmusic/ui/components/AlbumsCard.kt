@@ -18,7 +18,7 @@ fun AlbumsCard(
     album: Album,
     modifier: Modifier = Modifier,
     columnCount: Int,
-    onClick: () -> Unit,
+    onAlbumClick: (Long, String, String) -> Unit,
 ) {
     val cardWidth =
         (LocalContext.current.resources.displayMetrics.widthPixels / columnCount).dp / LocalDensity.current.density - 20.dp
@@ -26,10 +26,9 @@ fun AlbumsCard(
     AlbumsCard(
         album = album,
         cardWidth = cardWidth,
-        modifier = modifier
-    ) {
-        onClick()
-    }
+        modifier = modifier,
+        onAlbumClick = onAlbumClick
+    )
 }
 
 @Composable
@@ -37,7 +36,7 @@ private fun AlbumsCard(
     modifier: Modifier = Modifier,
     album: Album,
     cardWidth: Dp,
-    onClick: () -> Unit,
+    onAlbumClick: (Long, String, String) -> Unit,
 ) {
 
     var cardColor by remember {
@@ -48,7 +47,7 @@ private fun AlbumsCard(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .clickable { onClick() },
+            .clickable { onAlbumClick(album.albumId, album.albumName, album.artistName) },
         backgroundColor = cardColor
     ) {
         AlbumsItem(album = album, getColor = { cardColor = it.copy(0.4f) }, imageSize = cardWidth)
