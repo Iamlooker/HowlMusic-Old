@@ -14,7 +14,7 @@ import androidx.navigation.navigation
 import com.looker.howlmusic.MainDestinations.ALBUM_ID
 import com.looker.howlmusic.MainDestinations.ALBUM_NAME
 import com.looker.howlmusic.MainDestinations.ARTIST_NAME
-import com.looker.howlmusic.ui.albumdetail.DetailsMain
+import com.looker.howlmusic.ui.albumsdetails.AlbumsDetails
 import com.looker.howlmusic.ui.home.HomeSections
 import com.looker.howlmusic.ui.home.addHomeGraph
 
@@ -61,7 +61,7 @@ fun HowlNavGraph(
             )
         ) { backStackEntry ->
             val arguments = requireNotNull(backStackEntry.arguments)
-            DetailsMain(
+            AlbumsDetails(
                 albumId = arguments.getLong(ALBUM_ID),
                 albumName = arguments.getString(ALBUM_NAME),
                 artistName = arguments.getString(ARTIST_NAME),
