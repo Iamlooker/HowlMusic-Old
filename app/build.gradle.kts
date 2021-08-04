@@ -46,7 +46,12 @@ android {
 
 dependencies {
 
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha02")
+
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-alpha02")
+
     implementation("androidx.activity:activity-compose:1.3.0")
 
     //Accompanist

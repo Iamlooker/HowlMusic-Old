@@ -14,7 +14,7 @@ class SongsData(private val context: Context) {
 
     private fun createSongCursor(): Cursor? {
         return try {
-            context.applicationContext.contentResolver.query(
+            context.contentResolver.query(
                 externalUri,
                 songProjection,
                 isMusic,

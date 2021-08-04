@@ -14,7 +14,7 @@ class AlbumsData(private val context: Context) {
 
     private fun createAlbumCursor(): Cursor? {
         return try {
-            context.applicationContext.contentResolver.query(
+            context.contentResolver.query(
                 externalUri,
                 albumProjection,
                 isMusic,

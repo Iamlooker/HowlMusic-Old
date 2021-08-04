@@ -1,4 +1,4 @@
-package com.looker.howlmusic.ui.composables
+package com.looker.howlmusic.ui.components
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -22,16 +22,16 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
-fun ImageComp(
+fun HowlImage(
     modifier: Modifier = Modifier,
     data: Uri?,
     shape: CornerBasedShape = MaterialTheme.shapes.medium,
-    useColor: (Color) -> Unit = {},
+    vibrantColor: (Color) -> Unit = {},
 ) {
 
     val defaultColor = MaterialTheme.colors.surface
 
-    var dominantColor by remember {
+    var extractedColor by remember {
         mutableStateOf(defaultColor)
     }
 
@@ -54,18 +54,18 @@ fun ImageComp(
             val result = (imageLoader.execute(request)).drawable
 
             if (result != null) {
-                dominantColor = result.calcDominantColor()
+                extractedColor = result.calcDominantColor()
             }
-            useColor(dominantColor)
+            vibrantColor(extractedColor)
         }
     }
 
-    ImageCompMain(modifier = modifier.clip(shape), painter = imagePainter)
+    ImageDefault(modifier = modifier.clip(shape), painter = imagePainter)
 
 }
 
 @Composable
-fun ImageCompMain(
+fun ImageDefault(
     modifier: Modifier = Modifier,
     painter: Painter,
 ) {

@@ -1,4 +1,4 @@
-package com.looker.howlmusic.ui.composables
+package com.looker.howlmusic.ui.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
@@ -19,7 +19,7 @@ fun HeaderText(
     textAlign: TextAlign = TextAlign.Start,
 ) {
     Text(
-        modifier = modifier.padding(10.dp, 10.dp, 10.dp, 5.dp),
+        modifier = modifier.padding(horizontal = 8.dp),
         text = text ?: "No Title",
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
@@ -36,7 +36,7 @@ fun BodyText(
     style: TextStyle = Typography.body2,
 ) {
     Text(
-        modifier = modifier.padding(10.dp, 0.dp, 10.dp, 10.dp),
+        modifier = modifier.padding(horizontal = 8.dp),
         text = text ?: "No Artist",
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,

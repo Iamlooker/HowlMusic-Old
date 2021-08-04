@@ -1,4 +1,4 @@
-package com.looker.howlmusic.viewModels
+package com.looker.howlmusic.viewmodels
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
