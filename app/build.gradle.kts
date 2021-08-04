@@ -46,12 +46,7 @@ android {
 
 dependencies {
 
-    // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha02")
-
-    // LiveData
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-alpha02")
-
+    //Activity
     implementation("androidx.activity:activity-compose:1.3.0")
 
     //Accompanist
@@ -69,6 +64,12 @@ dependencies {
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt")
 
+    //DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0-rc02")
+
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-alpha02")
+
     //Material
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
@@ -83,5 +84,8 @@ dependencies {
     //UI
     implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
     implementation("androidx.compose.ui:ui-tooling:1.0.0")
-    implementation("androidx.datastore:datastore-preferences:1.0.0-rc02")
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha02")
+
 }

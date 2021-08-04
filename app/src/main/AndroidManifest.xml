@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HowlMusic">
         <activity
-            android:name="com.looker.howlmusic.ui.MainActivity"
+            android:name="com.looker.howlmusic.ui.HowlActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.HowlMusic.NoActionBar">

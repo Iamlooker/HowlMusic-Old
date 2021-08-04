@@ -11,7 +11,7 @@ import com.looker.howlmusic.HowlApp
 import com.looker.howlmusic.utils.Constants.permission
 
 
-class MainActivity : ComponentActivity() {
+class HowlActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
