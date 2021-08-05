@@ -3,4 +3,5 @@
     <string name="albums">Albums</string>
     <string name="songs">Songs</string>
     <string name="label_back">Back</string>
+    <string name="button_icon_label">buttonIcon</string>
 </resources>

@@ -1,0 +1,181 @@
+package com.looker.howlmusic.ui.onboarding
+
+import android.content.Context
+import android.content.pm.PackageManager
+import androidx.activity.compose.ManagedActivityResultLauncher
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.looker.howlmusic.R
+import com.looker.howlmusic.ui.components.ButtonWithIcon
+import com.looker.howlmusic.ui.components.ImageDefault
+import com.looker.howlmusic.utils.Constants.permission
+import com.looker.howlmusic.viewmodels.HowlViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
+
+@Composable
+fun OnBoardingPage(
+    navController: NavController,
+    viewModel: HowlViewModel = viewModel(),
+) {
+
+    val color = viewModel.buttonColor
+    val buttonText = viewModel.buttonText
+    val buttonIcon = viewModel.buttonIcon
+
+    val bannerText = AnnotatedString(
+        "Whoops",
+        SpanStyle(
+            MaterialTheme.colors.onBackground,
+            fontSize = 24.sp
+        )
+    ) + AnnotatedString(
+        " Nothing ",
+        SpanStyle(
+            color = color,
+            fontSize = 24.sp
+        )
+    ) + AnnotatedString(
+        "Here",
+        SpanStyle(
+            MaterialTheme.colors.onBackground,
+            fontSize = 24.sp
+        )
+    )
+
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = {
+            if (it) {
+                viewModel.onPermissionGranted()
+            } else {
+                viewModel.onPermissionDenied()
+            }
+        }
+    )
+
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
+    OnBoardImage(bannerText = bannerText,
+        buttonText = buttonText,
+        buttonIcon = buttonIcon,
+        buttonColor = color) {
+        handlePermissions(
+            context,
+            permissionLauncher,
+            onGranted = {
+                viewModel.onPermissionGranted()
+                scope.launch {
+                    delay(1000)
+                    navController.navigate("home")
+                }
+            },
+            onDenied = { viewModel.onPermissionDenied() }
+        )
+    }
+
+}
+
+@Composable
+fun OnBoardImage(
+    bannerText: AnnotatedString,
+    buttonText: String,
+    buttonIcon: ImageVector,
+    buttonColor: Color,
+    onClick: () -> Unit,
+) {
+    OnBoardContent(
+        bannerText = bannerText,
+        buttonText = buttonText,
+        buttonIcon = buttonIcon,
+        buttonColor = buttonColor,
+        painter = painterResource(id = R.drawable.empty),
+        onClick = onClick
+    )
+}
+
+@Composable
+fun OnBoardContent(
+    bannerText: AnnotatedString,
+    buttonText: String,
+    buttonIcon: ImageVector,
+    buttonColor: Color,
+    painter: Painter,
+    onClick: () -> Unit,
+) {
+    Surface(
+        color = MaterialTheme.colors.background,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            ImageDefault(
+                painter = painter
+            )
+
+            Text(
+                text = bannerText,
+                textAlign = TextAlign.Center
+            )
+
+            ButtonWithIcon(
+                buttonText = buttonText,
+                buttonIcon = buttonIcon,
+                buttonColor = buttonColor,
+                onClick = onClick
+            )
+        }
+    }
+}
+
+fun checkReadPermission(context: Context) =
+    ContextCompat.checkSelfPermission(
+        context, permission[0]
+    ) == PackageManager.PERMISSION_GRANTED
+
+fun askReadPermission(launcher: ManagedActivityResultLauncher<String, Boolean>) {
+    launcher.launch(permission[0])
+}
+
+fun handlePermissions(
+    context: Context,
+    launcher: ManagedActivityResultLauncher<String, Boolean>,
+    onGranted: () -> Unit,
+    onDenied: () -> Unit,
+) {
+    if (checkReadPermission(context)) {
+        onGranted()
+    } else {
+        onDenied()
+        askReadPermission(launcher)
+    }
+}

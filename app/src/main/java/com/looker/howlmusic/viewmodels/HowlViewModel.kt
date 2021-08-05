@@ -1,19 +1,34 @@
 package com.looker.howlmusic.viewmodels
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.runtime.MutableState
+import androidx.compose.material.icons.filled.DoneAll
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.looker.howlmusic.R
+import com.looker.howlmusic.ui.theme.Green
+import com.looker.howlmusic.ui.theme.OrangeDark
 
 class HowlViewModel : ViewModel() {
 
-    val buttonText: MutableState<String> = mutableStateOf("Grant Permission")
+    var buttonText by mutableStateOf("Grant Permission")
 
-    val buttonIcon: MutableState<ImageVector> = mutableStateOf(Icons.Default.Close)
+    var buttonIcon by mutableStateOf(Icons.Default.Close)
 
-    val buttonColor: MutableState<Int> = mutableStateOf(R.color.orange)
+    var buttonColor by mutableStateOf(OrangeDark)
+
+    fun onPermissionGranted() {
+        buttonText = "Granted"
+        buttonIcon = Icons.Default.DoneAll
+        buttonColor = Green
+    }
+
+    fun onPermissionDenied() {
+        buttonText = "Permission Denied"
+        buttonIcon = Icons.Default.Cancel
+        buttonColor = OrangeDark
+    }
 
 }

@@ -1,18 +1,20 @@
 package com.looker.howlmusic.ui.components
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.statusBarsPadding
 import com.looker.howlmusic.R
@@ -35,5 +37,37 @@ fun Up(iconTint: Color = MaterialTheme.colors.primary, upPress: () -> Unit) {
             tint = iconTint,
             contentDescription = stringResource(R.string.label_back)
         )
+    }
+}
+
+@Composable
+fun ButtonWithIcon(
+    buttonText: String,
+    buttonIcon: ImageVector,
+    buttonColor: Color,
+    onClick: () -> Unit,
+) {
+
+    OutlinedButton(
+        onClick = onClick
+    ) {
+        Row(
+            modifier = Modifier.wrapContentSize(),
+            horizontalArrangement = Arrangement.spacedBy(5.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                imageVector = buttonIcon,
+                contentDescription = stringResource(R.string.button_icon_label),
+                tint = buttonColor
+            )
+            Text(
+                text = AnnotatedString(
+                    text = buttonText,
+                    SpanStyle(color = buttonColor)
+                ),
+                modifier = Modifier.animateContentSize()
+            )
+        }
     }
 }
