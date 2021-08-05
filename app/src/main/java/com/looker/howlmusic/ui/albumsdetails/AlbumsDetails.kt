@@ -12,7 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.insets.statusBarsHeight
+import com.looker.howlmusic.model.Song
 import com.looker.howlmusic.ui.components.BodyText
 import com.looker.howlmusic.ui.components.HeaderText
 import com.looker.howlmusic.ui.components.HowlImage
@@ -21,6 +23,7 @@ import com.looker.howlmusic.ui.home.SongsList
 import com.looker.howlmusic.ui.theme.Typography
 import com.looker.howlmusic.utils.Constants
 import com.looker.howlmusic.utils.Constants.fadeInDuration
+import com.looker.howlmusic.viewmodels.AlbumsViewModel
 
 @Composable
 fun AlbumsDetails(
@@ -28,13 +31,19 @@ fun AlbumsDetails(
     albumName: String?,
     artistName: String?,
     upPress: () -> Unit = {},
+    viewModel: AlbumsViewModel = viewModel(),
 ) {
 
-    Up(upPress = upPress)
+    Up(iconTint = Color.Black, upPress = upPress)
 
     val albumArtUri = ContentUris.withAppendedId(Constants.artworkUri, albumId)
 
-    AlbumsDetails(albumArtUri = albumArtUri, albumName = albumName, artistName = artistName)
+    AlbumsDetails(
+        albumArtUri = albumArtUri,
+        albumName = albumName,
+        artistName = artistName,
+        list = viewModel.getSongList(albumId)
+    )
 
 }
 
@@ -43,22 +52,23 @@ private fun AlbumsDetails(
     albumArtUri: Uri,
     albumName: String?,
     artistName: String?,
+    list: MutableList<Song>,
 ) {
-    Column {
-        AlbumsHeaderGradient(albumArtUri = albumArtUri,
-            albumName = albumName,
-            artistName = artistName)
-        AlbumsDetailsList()
-    }
+    AlbumsView(
+        albumArtUri = albumArtUri,
+        albumName = albumName,
+        artistName = artistName,
+        list = list
+    )
 }
 
 @Composable
-fun AlbumsHeaderGradient(
+fun AlbumsView(
     albumArtUri: Uri,
     albumName: String?,
     artistName: String?,
+    list: MutableList<Song>,
 ) {
-
     var backgroundGradient by remember {
         mutableStateOf(Color.Transparent)
     }
@@ -69,7 +79,45 @@ fun AlbumsHeaderGradient(
             durationMillis = fadeInDuration
         )
     )
+    AlbumsHeaderBackground(animateBackgroundGradient = animateBackgroundGradient)
+    {
+        AlbumsHeader(
+            albumArtUri = albumArtUri,
+            albumName = albumName,
+            artistName = artistName
+        ) {
+            backgroundGradient = it
+        }
+        AlbumsDetailsList(list)
+    }
 
+}
+
+@Composable
+fun AlbumsHeader(
+    albumArtUri: Uri,
+    albumName: String?,
+    artistName: String?,
+    getColor: (Color) -> Unit,
+) {
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(15.dp)
+    ) {
+        HowlImage(data = albumArtUri) { vibrantColor ->
+            getColor(vibrantColor.copy(0.4f))
+        }
+        AlbumsHeaderText(albumName = albumName, artistName = artistName)
+    }
+}
+
+@Composable
+fun AlbumsHeaderBackground(
+    animateBackgroundGradient: Color,
+    content: @Composable () -> Unit,
+) {
     Column {
 
         Spacer(
@@ -82,7 +130,7 @@ fun AlbumsHeaderGradient(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.5f)
+                .fillMaxHeight()
                 .background(
                     Brush.verticalGradient(
                         listOf(
@@ -93,36 +141,11 @@ fun AlbumsHeaderGradient(
                 )
 
         ) {
-            AlbumsHeader(
-                albumArtUri = albumArtUri,
-                albumName = albumName,
-                artistName = artistName,
-                getColor = { vibrantColor ->
-                    backgroundGradient = vibrantColor
-                }
-            )
+            Column { content() }
         }
     }
 }
 
-@Composable
-fun AlbumsHeader(
-    albumArtUri: Uri,
-    albumName: String?,
-    artistName: String?,
-    getColor: (Color) -> Unit,
-) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(15.dp)
-    ) {
-        HowlImage(data = albumArtUri) { vibrantColor ->
-            getColor(vibrantColor.copy(0.4f))
-        }
-        AlbumsHeaderText(albumName = albumName, artistName = artistName)
-    }
-}
 
 @Composable
 fun AlbumsHeaderText(albumName: String?, artistName: String?) {
@@ -141,6 +164,8 @@ fun AlbumsHeaderText(albumName: String?, artistName: String?) {
 }
 
 @Composable
-fun AlbumsDetailsList() {
-    SongsList(songsList = mutableListOf())
+fun AlbumsDetailsList(
+    list: MutableList<Song>,
+) {
+    SongsList(songsList = list)
 }

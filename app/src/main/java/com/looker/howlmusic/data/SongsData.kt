@@ -33,33 +33,14 @@ class SongsData(private val context: Context) {
             do {
                 val songName = songCursor.getString(0)
                 val artistName = songCursor.getString(1)
-                val songId = songCursor.getLong(2)
+                val albumId = songCursor.getLong(2)
                 val songDurationRaw = songCursor.getInt(3)
                 val songDuration =
                     (songDurationRaw / 60).toString() + (songDurationRaw % 60).toString()
-                val albumArtUri = ContentUris.withAppendedId(artworkUri, songId)
-                list.add(Song(songName, artistName, songDuration, albumArtUri))
+                val albumArtUri = ContentUris.withAppendedId(artworkUri, albumId)
+                list.add(Song(songName, artistName, songDuration, albumArtUri, albumId))
             } while (songCursor.moveToNext())
         }
         return list
     }
-
-    fun getPerAlbumList(): MutableList<Song> {
-        val list: MutableList<Song> = mutableListOf()
-        val songCursor = createSongCursor()
-        if (songCursor != null && songCursor.moveToFirst()) {
-            do {
-                val songName = songCursor.getString(0)
-                val artistName = songCursor.getString(1)
-                val songId = songCursor.getLong(2)
-                val songDurationRaw = songCursor.getInt(3)
-                val songDuration =
-                    (songDurationRaw / 60).toString() + (songDurationRaw % 60).toString()
-                val albumArtUri = ContentUris.withAppendedId(artworkUri, songId)
-                list.add(Song(songName, artistName, songDuration, albumArtUri))
-            } while (songCursor.moveToNext())
-        }
-        return list
-    }
-
 }

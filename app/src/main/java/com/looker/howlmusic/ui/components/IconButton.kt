@@ -26,7 +26,7 @@ fun Up(iconTint: Color = MaterialTheme.colors.primary, upPress: () -> Unit) {
             .padding(horizontal = 16.dp, vertical = 10.dp)
             .size(36.dp)
             .background(
-                color = MaterialTheme.colors.surface.copy(alpha = 0.8f),
+                color = MaterialTheme.colors.surface,
                 shape = CircleShape
             )
     ) {
