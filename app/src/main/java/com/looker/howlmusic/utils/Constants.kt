@@ -1,7 +1,6 @@
 package com.looker.howlmusic.utils
 
 import android.net.Uri
-import android.os.Build
 import android.provider.MediaStore
 
 object Constants {
@@ -31,4 +30,6 @@ object Constants {
 
     const val sortOrderAlbum: String = MediaStore.Audio.Media.ALBUM + " COLLATE NOCASE ASC"
     const val sortOrderSong: String = MediaStore.Audio.Media.TITLE + " COLLATE NOCASE ASC"
+
+    const val fadeInDuration = 500
 }

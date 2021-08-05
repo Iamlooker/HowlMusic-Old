@@ -1,5 +1,7 @@
 package com.looker.howlmusic.ui.components
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
@@ -12,6 +14,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.looker.howlmusic.model.Album
+import com.looker.howlmusic.utils.Constants.fadeInDuration
 
 @Composable
 fun AlbumsCard(
@@ -43,12 +46,19 @@ private fun AlbumsCard(
         mutableStateOf(Color.Transparent)
     }
 
+    val animatedColor by animateColorAsState(
+        targetValue = cardColor,
+        animationSpec = TweenSpec(
+            durationMillis = fadeInDuration
+        )
+    )
+
     Card(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .clickable { onAlbumClick(album.albumId, album.albumName, album.artistName) },
-        backgroundColor = cardColor
+        backgroundColor = animatedColor
     ) {
         AlbumsItem(album = album, getColor = { cardColor = it.copy(0.4f) }, imageSize = cardWidth)
     }

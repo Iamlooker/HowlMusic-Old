@@ -2,6 +2,8 @@ package com.looker.howlmusic.ui.albumsdetails
 
 import android.content.ContentUris
 import android.net.Uri
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
@@ -18,6 +20,7 @@ import com.looker.howlmusic.ui.components.Up
 import com.looker.howlmusic.ui.home.SongsList
 import com.looker.howlmusic.ui.theme.Typography
 import com.looker.howlmusic.utils.Constants
+import com.looker.howlmusic.utils.Constants.fadeInDuration
 
 @Composable
 fun AlbumsDetails(
@@ -60,13 +63,20 @@ fun AlbumsHeaderGradient(
         mutableStateOf(Color.Transparent)
     }
 
+    val animateBackgroundGradient by animateColorAsState(
+        targetValue = backgroundGradient,
+        animationSpec = TweenSpec(
+            durationMillis = fadeInDuration
+        )
+    )
+
     Column {
 
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()
                 .statusBarsHeight(15.dp)
-                .background(backgroundGradient)
+                .background(animateBackgroundGradient)
         )
 
         Box(
@@ -76,7 +86,7 @@ fun AlbumsHeaderGradient(
                 .background(
                     Brush.verticalGradient(
                         listOf(
-                            backgroundGradient,
+                            animateBackgroundGradient,
                             Color.Transparent
                         )
                     )

@@ -17,6 +17,7 @@ import androidx.palette.graphics.Palette
 import coil.ImageLoader
 import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
+import com.looker.howlmusic.utils.Constants.fadeInDuration
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -41,7 +42,7 @@ fun HowlImage(
 
     val request = ImageRequest.Builder(context)
         .data(data = data)
-        .crossfade(1000)
+        .crossfade(fadeInDuration)
         .build()
 
     val imagePainter = rememberImagePainter(
