@@ -21,7 +21,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -47,10 +48,9 @@ android {
 dependencies {
 
     //Activity
-    implementation("androidx.activity:activity-compose:1.3.0")
+    implementation("androidx.activity:activity-compose:1.3.1")
 
     //Accompanist
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.15.0")
     implementation("com.google.accompanist:accompanist-insets:0.15.0")
     implementation("com.google.accompanist:accompanist-insets-ui:0.15.0")
 
@@ -64,11 +64,8 @@ dependencies {
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt")
 
-    //DataStore
-    implementation("androidx.datastore:datastore-preferences:1.0.0-rc02")
-
     // LiveData
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-alpha02")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-alpha03")
 
     //Material
     implementation("com.google.android.material:material:1.4.0")
@@ -76,16 +73,16 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:${rootProject.extra["compose_version"]}")
 
     //Navigation
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha05")
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha06")
 
     //Palette
     implementation("androidx.palette:palette-ktx:1.0.0")
 
     //UI
     implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
-    implementation("androidx.compose.ui:ui-tooling:1.0.0")
+    implementation("androidx.compose.ui:ui-tooling:1.0.1")
 
     // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha02")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha03")
 
 }
