@@ -2,6 +2,7 @@ package com.looker.howlmusic
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
@@ -20,6 +21,7 @@ import com.looker.howlmusic.ui.albumsdetails.AlbumsDetails
 import com.looker.howlmusic.ui.home.HomeSections
 import com.looker.howlmusic.ui.home.addHomeGraph
 import com.looker.howlmusic.ui.onboarding.OnBoardingPage
+import com.looker.howlmusic.utils.checkReadPermission
 
 object MainDestinations {
     const val ON_BOARD = "onBoard"
@@ -34,8 +36,12 @@ object MainDestinations {
 fun HowlNavGraph(
     modifier: Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = ON_BOARD,
 ) {
+
+    var startDestination = ON_BOARD
+
+    if (checkReadPermission(LocalContext.current)) startDestination = HOME_ROUTE
+
     NavHost(
         navController = navController,
         startDestination = startDestination,

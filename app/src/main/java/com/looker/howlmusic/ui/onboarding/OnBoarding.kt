@@ -1,8 +1,5 @@
 package com.looker.howlmusic.ui.onboarding
 
-import android.content.Context
-import android.content.pm.PackageManager
-import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
@@ -24,13 +21,12 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.looker.howlmusic.R
 import com.looker.howlmusic.ui.components.ButtonWithIcon
 import com.looker.howlmusic.ui.components.ImageDefault
 import com.looker.howlmusic.utils.Constants.fadeInDuration
-import com.looker.howlmusic.utils.Constants.permission
+import com.looker.howlmusic.utils.handlePermissions
 import com.looker.howlmusic.viewmodels.HowlViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -65,7 +61,6 @@ fun OnBoardingPage(
             fontSize = 24.sp
         )
     )
-
 
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
@@ -154,28 +149,5 @@ fun OnBoardContent(
                 onClick = onClick
             )
         }
-    }
-}
-
-fun checkReadPermission(context: Context) =
-    ContextCompat.checkSelfPermission(
-        context, permission[0]
-    ) == PackageManager.PERMISSION_GRANTED
-
-fun askReadPermission(launcher: ManagedActivityResultLauncher<String, Boolean>) {
-    launcher.launch(permission[0])
-}
-
-fun handlePermissions(
-    context: Context,
-    launcher: ManagedActivityResultLauncher<String, Boolean>,
-    onGranted: () -> Unit,
-    onDenied: () -> Unit,
-) {
-    if (checkReadPermission(context)) {
-        onGranted()
-    } else {
-        onDenied()
-        askReadPermission(launcher)
     }
 }
