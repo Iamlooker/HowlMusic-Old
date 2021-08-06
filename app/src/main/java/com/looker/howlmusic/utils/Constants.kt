@@ -19,7 +19,8 @@ object Constants {
         MediaStore.Audio.Media.TITLE,
         MediaStore.Audio.Media.ARTIST,
         MediaStore.Audio.Media.ALBUM_ID,
-        MediaStore.Audio.Media.DURATION
+        MediaStore.Audio.Media.DURATION,
+        MediaStore.Audio.Media._ID
     )
 
     val artworkUri: Uri = Uri.parse("content://media/external/audio/albumart")

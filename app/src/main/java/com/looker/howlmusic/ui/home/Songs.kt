@@ -17,11 +17,11 @@ import com.looker.howlmusic.viewmodels.SongsViewModel
 fun Songs(viewModel: SongsViewModel = viewModel()) {
     val songsList = viewModel.songsList
 
-    SongsList(songsList = songsList)
+    SongsList(songsList = songsList, viewModel = viewModel)
 }
 
 @Composable
-fun SongsList(songsList: MutableList<Song>) {
+fun SongsList(songsList: MutableList<Song>, viewModel: SongsViewModel = viewModel()) {
 
     LazyColumn(
         contentPadding = rememberInsetsPaddingValues(
@@ -31,7 +31,7 @@ fun SongsList(songsList: MutableList<Song>) {
     ) {
         items(songsList) { song ->
             SongsCard(modifier = Modifier.padding(10.dp), song = song) {
-
+                viewModel.play(song.songUri)
             }
         }
     }
