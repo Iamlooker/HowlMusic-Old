@@ -14,6 +14,7 @@ import androidx.navigation.navigation
 import com.looker.howlmusic.MainDestinations.ALBUM_ID
 import com.looker.howlmusic.MainDestinations.ALBUM_NAME
 import com.looker.howlmusic.MainDestinations.ARTIST_NAME
+import com.looker.howlmusic.MainDestinations.HOME_ROUTE
 import com.looker.howlmusic.MainDestinations.ON_BOARD
 import com.looker.howlmusic.ui.albumsdetails.AlbumsDetails
 import com.looker.howlmusic.ui.home.HomeSections
@@ -42,11 +43,11 @@ fun HowlNavGraph(
     ) {
 
         composable(ON_BOARD) {
-            OnBoardingPage(navController = navController)
+            OnBoardingPage { navController.navigate(HOME_ROUTE) }
         }
 
         navigation(
-            route = MainDestinations.HOME_ROUTE,
+            route = HOME_ROUTE,
             startDestination = HomeSections.ALBUMS.route,
         ) {
             addHomeGraph(
