@@ -29,6 +29,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.looker.howlmusic.R
 import com.looker.howlmusic.ui.components.ButtonWithIcon
 import com.looker.howlmusic.ui.components.ImageDefault
+import com.looker.howlmusic.utils.Constants.fadeInDuration
 import com.looker.howlmusic.utils.Constants.permission
 import com.looker.howlmusic.viewmodels.HowlViewModel
 import kotlinx.coroutines.delay
@@ -90,7 +91,7 @@ fun OnBoardingPage(
             onGranted = {
                 viewModel.onPermissionGranted()
                 scope.launch {
-                    delay(1000)
+                    delay(fadeInDuration.toLong())
                     navigate()
                 }
             },
