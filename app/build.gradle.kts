@@ -69,7 +69,7 @@ dependencies {
 
     //Material
     implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
+    implementation("androidx.compose.material:material:1.0.1")
     implementation("androidx.compose.material:material-icons-extended:${rootProject.extra["compose_version"]}")
 
     //Navigation
@@ -79,7 +79,7 @@ dependencies {
     implementation("androidx.palette:palette-ktx:1.0.0")
 
     //UI
-    implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
+    implementation("androidx.compose.ui:ui:1.0.1")
     implementation("androidx.compose.ui:ui-tooling:1.0.1")
 
     // ViewModel
