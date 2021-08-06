@@ -12,10 +12,9 @@ class SongsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val app = application
 
-    private fun exoPlayer() = SimpleExoPlayer.Builder(app).build()
+    fun exoPlayer() = SimpleExoPlayer.Builder(app).build()
 
-    fun playSong(song: Song) {
-        val player = exoPlayer()
+    fun playSong(player: SimpleExoPlayer, song: Song) {
         val item = MediaItem.fromUri(song.songUri)
         player.setMediaItem(item)
         player.prepare()
