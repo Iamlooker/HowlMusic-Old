@@ -82,7 +82,7 @@ dependencies {
     implementation("androidx.compose.ui:ui:1.0.1")
     implementation("androidx.compose.ui:ui-tooling:1.0.1")
 
-    // ViewModel
+    //ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha03")
 
 }
