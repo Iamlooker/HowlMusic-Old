@@ -57,10 +57,6 @@ fun AlbumsList(
                 modifier = Modifier.padding(10.dp),
                 onAlbumClick = onAlbumClick
             )
-//            {
-//                onAlbumClick
-//                navController.navigate("${MainDestinations.ALBUMS_DETAILS_ROUTE}/${album.albumId}/${album.albumName}/${album.artistName}")
-//            }
         }
     }
 }
