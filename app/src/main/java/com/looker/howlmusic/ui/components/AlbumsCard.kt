@@ -2,6 +2,7 @@ package com.looker.howlmusic.ui.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.TweenSpec
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
@@ -41,26 +42,16 @@ private fun AlbumsCard(
     cardWidth: Dp,
     onAlbumClick: (Long, String, String) -> Unit,
 ) {
-
-    var cardColor by remember {
-        mutableStateOf(Color.Transparent)
-    }
-
-    val animatedColor by animateColorAsState(
-        targetValue = cardColor,
-        animationSpec = TweenSpec(
-            durationMillis = fadeInDuration
-        )
-    )
-
     Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .clickable { onAlbumClick(album.albumId, album.albumName, album.artistName) },
-        backgroundColor = animatedColor
+        modifier = modifier.clickable {
+            onAlbumClick(
+                album.albumId,
+                album.albumName,
+                album.artistName
+            )
+        }
     ) {
-        AlbumsItem(album = album, getColor = { cardColor = it.copy(0.4f) }, imageSize = cardWidth)
+        AlbumsItem(album = album, imageSize = cardWidth)
     }
 }
 
@@ -68,20 +59,38 @@ private fun AlbumsCard(
 fun AlbumsItem(
     album: Album,
     imageSize: Dp,
-    getColor: (Color) -> Unit,
 ) {
+
+    var backgroundColor by remember {
+        mutableStateOf(Color.Transparent)
+    }
+
+    val animatedColor by animateColorAsState(
+        targetValue = backgroundColor,
+        animationSpec = TweenSpec(
+            durationMillis = fadeInDuration
+        )
+    )
+
     Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier
+            .wrapContentSize()
+            .background(animatedColor),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         HowlImage(
             data = album.albumArtUri,
             modifier = Modifier.size(imageSize)
         ) { vibrantColor ->
-            getColor(vibrantColor)
+            backgroundColor = vibrantColor.copy(0.4f)
         }
         AlbumsItemText(album = album)
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(
+            modifier = Modifier
+                .height(8.dp)
+                .fillMaxWidth()
+        )
     }
 }
 
@@ -89,8 +98,6 @@ fun AlbumsItem(
 fun AlbumsItemText(
     album: Album,
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        HeaderText(text = album.albumName)
-        BodyText(text = album.artistName)
-    }
+    HeaderText(text = album.albumName)
+    BodyText(text = album.artistName)
 }

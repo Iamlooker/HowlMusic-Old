@@ -34,6 +34,7 @@ fun BodyText(
     modifier: Modifier = Modifier,
     text: String?,
     style: TextStyle = Typography.body2,
+    textAlign: TextAlign = TextAlign.Start,
 ) {
     Text(
         modifier = modifier.padding(horizontal = 8.dp),
@@ -41,6 +42,7 @@ fun BodyText(
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
         style = style,
-        color = MaterialTheme.colors.onBackground
+        color = MaterialTheme.colors.onBackground,
+        textAlign = textAlign
     )
 }
