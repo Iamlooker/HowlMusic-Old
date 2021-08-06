@@ -31,7 +31,7 @@ fun SongsList(songsList: MutableList<Song>, viewModel: SongsViewModel = viewMode
     ) {
         items(songsList) { song ->
             SongsCard(modifier = Modifier.padding(10.dp), song = song) {
-                viewModel.play(song.songUri)
+                viewModel.playSong(song = song)
             }
         }
     }
