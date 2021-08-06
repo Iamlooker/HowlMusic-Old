@@ -64,6 +64,9 @@ dependencies {
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt")
 
+    //Exoplayer
+    implementation("com.google.android.exoplayer:exoplayer:2.14.2")
+
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-alpha03")
 
