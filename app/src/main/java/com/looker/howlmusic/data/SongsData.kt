@@ -35,12 +35,18 @@ class SongsData(private val context: Context) {
                 val artistName = songCursor.getString(1)
                 val albumId = songCursor.getLong(2)
                 val songDurationRaw = songCursor.getInt(3)
-                val songDuration =
-                    (songDurationRaw / 60).toString() + (songDurationRaw % 60).toString()
+                val songDuration = convertDuration(songDurationRaw)
                 val albumArtUri = ContentUris.withAppendedId(artworkUri, albumId)
                 list.add(Song(songName, artistName, songDuration, albumArtUri, albumId))
             } while (songCursor.moveToNext())
         }
         return list
+    }
+
+    private fun convertDuration(dur: Int): String {
+        val mns: Int = dur / 60000 % 60000
+        val scs: Int = dur % 60000 / 1000
+
+        return "$mns:$scs"
     }
 }
