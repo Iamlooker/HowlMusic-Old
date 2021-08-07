@@ -5,7 +5,6 @@ plugins {
 
 android {
     compileSdk = 30
-    buildToolsVersion = "30.0.3"
 
     defaultConfig {
         applicationId = "com.looker.howlmusic"
