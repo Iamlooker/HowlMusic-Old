@@ -34,14 +34,8 @@ class AlbumsData(private val context: Context) {
                 val albumId = albumCursor.getLong(2)
                 list.add(Album(albumName, artistName, albumId))
 
-                for (i in list.indices) {
-                    if (i > 0 && list[i] == list[i - 1]) {
-                        list.remove(list[i])
-                    }
-                }
-
             } while (albumCursor.moveToNext())
         }
-        return list
+        return list.toSet().toMutableList()
     }
 }
