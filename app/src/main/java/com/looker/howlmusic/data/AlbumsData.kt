@@ -36,6 +36,6 @@ class AlbumsData(private val context: Context) {
 
             } while (albumCursor.moveToNext())
         }
-        return list.toSet().toMutableList()
+        return list.distinct().toMutableList()
     }
 }
