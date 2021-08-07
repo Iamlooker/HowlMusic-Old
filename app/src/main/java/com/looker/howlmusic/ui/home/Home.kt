@@ -15,9 +15,11 @@ fun NavGraphBuilder.addHomeGraph(
 ) {
 
     composable(HomeSections.ALBUMS.route) { from ->
-        Albums(onAlbumClick = { albumId, albumName, artistName ->
-            onAlbumClicked(albumId, albumName, artistName, from)
-        })
+        Albums(
+            onAlbumClick = { albumId, albumName, artistName ->
+                onAlbumClicked(albumId, albumName, artistName, from)
+            }
+        )
     }
     composable(HomeSections.SONGS.route) {
         Songs()
