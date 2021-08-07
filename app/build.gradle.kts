@@ -51,11 +51,11 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.3.1")
 
     //Accompanist
-    implementation("com.google.accompanist:accompanist-insets:0.15.0")
-    implementation("com.google.accompanist:accompanist-insets-ui:0.15.0")
+    implementation("com.google.accompanist:accompanist-insets:0.16.0")
+    implementation("com.google.accompanist:accompanist-insets-ui:0.16.0")
 
     //Coil
-    implementation("io.coil-kt:coil-compose:1.3.1")
+    implementation("io.coil-kt:coil-compose:1.3.2")
 
     //Core
     implementation("androidx.core:core-ktx:1.6.0")
@@ -72,7 +72,7 @@ dependencies {
 
     //Material
     implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.compose.material:material:1.0.1")
+    implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
     implementation("androidx.compose.material:material-icons-extended:${rootProject.extra["compose_version"]}")
 
     //Navigation
@@ -82,8 +82,8 @@ dependencies {
     implementation("androidx.palette:palette-ktx:1.0.0")
 
     //UI
-    implementation("androidx.compose.ui:ui:1.0.1")
-    implementation("androidx.compose.ui:ui-tooling:1.0.1")
+    implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
+    implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
 
     //ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha03")
