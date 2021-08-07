@@ -74,13 +74,15 @@ fun HowlNavGraph(
                 navArgument(ARTIST_NAME) { type = NavType.StringType },
             )
         ) { backStackEntry ->
-            val arguments = requireNotNull(backStackEntry.arguments)
-            AlbumsDetails(
-                albumId = arguments.getLong(ALBUM_ID),
-                albumName = arguments.getString(ALBUM_NAME),
-                artistName = arguments.getString(ARTIST_NAME),
-                upPress = { navController.navigateUp() }
-            )
+            val arguments = backStackEntry.arguments
+            arguments?.getLong(ALBUM_ID)?.let {
+                AlbumsDetails(
+                    albumId = it,
+                    albumName = arguments.getString(ALBUM_NAME),
+                    artistName = arguments.getString(ARTIST_NAME),
+                    upPress = { navController.navigateUp() }
+                )
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ import com.looker.howlmusic.viewmodels.AlbumsViewModel
 @Composable
 fun Albums(
     viewModel: AlbumsViewModel = viewModel(),
-    onAlbumClick: (Long, String, String) -> Unit,
+    onAlbumClick: (Long, String?, String?) -> Unit,
 ) {
     Albums(
         albumsList = viewModel.albumsList,
@@ -31,7 +31,7 @@ fun Albums(
 private fun Albums(
     albumsList: MutableList<Album>,
     columnCount: Int,
-    onAlbumClick: (Long, String, String) -> Unit,
+    onAlbumClick: (Long, String?, String?) -> Unit,
 ) {
     AlbumsList(albumsList = albumsList, columnCount = columnCount, onAlbumClick = onAlbumClick)
 }
@@ -41,7 +41,7 @@ private fun Albums(
 fun AlbumsList(
     albumsList: MutableList<Album>,
     columnCount: Int,
-    onAlbumClick: (Long, String, String) -> Unit,
+    onAlbumClick: (Long, String?, String?) -> Unit,
 ) {
     LazyVerticalGrid(
         cells = GridCells.Fixed(count = columnCount),

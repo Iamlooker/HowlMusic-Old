@@ -11,7 +11,7 @@ import androidx.navigation.compose.composable
 import com.looker.howlmusic.R
 
 fun NavGraphBuilder.addHomeGraph(
-    onAlbumClicked: (Long, String, String, NavBackStackEntry) -> Unit,
+    onAlbumClicked: (Long, String?, String?, NavBackStackEntry) -> Unit,
 ) {
 
     composable(HomeSections.ALBUMS.route) { from ->

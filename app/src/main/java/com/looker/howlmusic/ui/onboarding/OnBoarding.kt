@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -76,8 +77,9 @@ fun OnBoardingPage(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    OnBoardImage(bannerText = bannerText,
-        buttonText = buttonText,
+    OnBoardImage(
+        bannerText = bannerText,
+        buttonText = stringResource(id = buttonText),
         buttonIcon = buttonIcon,
         buttonColor = color) {
         handlePermissions(

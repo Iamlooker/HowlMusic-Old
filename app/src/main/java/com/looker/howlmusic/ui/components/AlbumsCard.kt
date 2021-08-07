@@ -24,7 +24,7 @@ fun AlbumsCard(
     album: Album,
     modifier: Modifier = Modifier,
     columnCount: Int,
-    onAlbumClick: (Long, String, String) -> Unit,
+    onAlbumClick: (Long, String?, String?) -> Unit,
 ) {
     val cardWidth =
         (LocalContext.current.resources.displayMetrics.widthPixels / columnCount).dp / LocalDensity.current.density - 20.dp
@@ -42,7 +42,7 @@ private fun AlbumsCard(
     modifier: Modifier = Modifier,
     album: Album,
     cardWidth: Dp,
-    onAlbumClick: (Long, String, String) -> Unit,
+    onAlbumClick: (Long, String?, String?) -> Unit,
 ) {
     Card(
         modifier = modifier.clickable {

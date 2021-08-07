@@ -4,4 +4,9 @@
     <string name="songs">Songs</string>
     <string name="label_back">Back</string>
     <string name="button_icon_label">buttonIcon</string>
+
+    <string name="ask_permission">Grant Permission</string>
+    <string name="permission_granted">Granted</string>
+    <string name="permission_denied">Permission Denied</string>
+
 </resources>
