@@ -55,7 +55,8 @@ fun AlbumsList(
                 album = album,
                 columnCount = columnCount,
                 modifier = Modifier.padding(10.dp),
-                onAlbumClick = onAlbumClick
+                onAlbumClick = onAlbumClick,
+                showImage = true
             )
         }
     }

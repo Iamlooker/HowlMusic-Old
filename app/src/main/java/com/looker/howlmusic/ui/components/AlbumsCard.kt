@@ -3,6 +3,7 @@ package com.looker.howlmusic.ui.components
 import android.content.ContentUris
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.TweenSpec
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -24,10 +25,17 @@ fun AlbumsCard(
     album: Album,
     modifier: Modifier = Modifier,
     columnCount: Int,
+    showImage: Boolean,
     onAlbumClick: (Long, String?, String?) -> Unit,
 ) {
-    val cardWidth =
-        (LocalContext.current.resources.displayMetrics.widthPixels / columnCount).dp / LocalDensity.current.density - 20.dp
+    val cardWidth by
+    animateDpAsState(
+        if (showImage) {
+            (LocalContext.current.resources.displayMetrics.widthPixels / columnCount
+                    ).dp / LocalDensity.current.density - 20.dp
+        } else 0.dp
+    )
+
 
     AlbumsCard(
         album = album,
