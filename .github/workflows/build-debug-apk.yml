@@ -31,10 +31,8 @@ jobs:
     name: TG_Notify
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: send custom message with args
-      uses: appleboy/telegram-action@master
+    - uses: yanzay/notify-telegram@v0.1.0
+      if: always()
       with:
-        to: ${{ secrets.TELEGRAM_DAILY_ID }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        args: The ${{ github.event_name }} event triggered first step.
+        chat: ${{ secrets.chat }} # user id or channel name secret
+        token: ${{ secrets.token }}
