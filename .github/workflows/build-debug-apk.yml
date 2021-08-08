@@ -34,13 +34,21 @@ jobs:
         with:
           name: apk
           path: app/build/outputs/apk/debug/app-debug.apk 
+      - uses: actions/checkout@v1
+      - name: Send Debug APK
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: Sending Apk
+          document: app/build/outputs/apk/debug/app-debug.apk
           
   notify:
     name: TG_Notify
     needs: apk
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v1
     - name: Send Debug APK
       uses: appleboy/telegram-action@master
       with:
