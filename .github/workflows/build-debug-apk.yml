@@ -31,9 +31,12 @@ jobs:
     name: TG_Notify
     runs-on: ubuntu-latest
     steps:
-    - uses: yanzay/notify-telegram@v0.1.0
-      if: always()
+    - uses: actions/checkout@master
+    - name: send photo message
+      uses: appleboy/telegram-action@master
       with:
-        chat: ${{ secrets.TELEGRAM_ID }} # user id or channel name secret
+        to: ${{ secrets.TELEGRAM_CHAT_ID }}
         token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        status: ${{ job.status }}
+        message: send photo message
+        document: app/build/outputs/apk/debug/app-debug.apk
+
