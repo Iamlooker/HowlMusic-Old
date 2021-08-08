@@ -10,9 +10,9 @@ object Constants {
     )
 
     val albumProjection = arrayOf(
+        MediaStore.Audio.Media.ALBUM_ID,
         MediaStore.Audio.Media.ALBUM,
-        MediaStore.Audio.Media.ARTIST,
-        MediaStore.Audio.Media.ALBUM_ID
+        MediaStore.Audio.Media.ARTIST
     )
 
     val songProjection = arrayOf(

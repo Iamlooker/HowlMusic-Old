@@ -29,13 +29,14 @@ class AlbumsData(private val context: Context) {
         val albumCursor = createAlbumCursor()
         if (albumCursor != null && albumCursor.moveToFirst()) {
             do {
-                val albumName = albumCursor.getString(0)
-                val artistName = albumCursor.getString(1)
-                val albumId = albumCursor.getLong(2)
-                list.add(Album(albumName, artistName, albumId))
+                val albumId = albumCursor.getLong(0)
+                val albumName = albumCursor.getString(1)
+                val artistName = albumCursor.getString(2)
+                list.add(Album(albumId, albumName, artistName))
 
             } while (albumCursor.moveToNext())
         }
+        albumCursor?.close()
         return list.distinct().toMutableList()
     }
 }
