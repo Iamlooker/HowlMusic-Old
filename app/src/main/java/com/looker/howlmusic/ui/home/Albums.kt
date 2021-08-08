@@ -21,7 +21,7 @@ fun Albums(
     onAlbumClick: (Long, String?, String?) -> Unit,
 ) {
     Albums(
-        albumsList = viewModel.albumsList,
+        albumsList = viewModel.albums.value,
         columnCount = viewModel.albumsColumn,
         onAlbumClick = onAlbumClick
     )
