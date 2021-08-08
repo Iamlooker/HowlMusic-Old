@@ -29,14 +29,15 @@ jobs:
           
   notify:
     name: TG_Notify
+    needs: apk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: send photo message
+    - name: Send Debug APK
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_CHAT_ID }}
         token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        message: send photo message
+        message: Sending Debug APK
         document: app/build/outputs/apk/debug/app-debug.apk
 
