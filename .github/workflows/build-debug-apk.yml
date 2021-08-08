@@ -36,3 +36,4 @@ jobs:
       with:
         chat: ${{ secrets.TELEGRAM_ID }} # user id or channel name secret
         token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        status: ${{ job.status }}
