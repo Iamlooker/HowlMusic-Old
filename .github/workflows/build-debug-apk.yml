@@ -1,43 +1,42 @@
-name: CI
+name: Build Release APK
 
 on:
+  workflow_dispatch:
   push:
     branches: [ alpha ]
-  pull_request:
-    branches: [ alpha ]
 
-  workflow_dispatch:
 
 jobs:
   apk:
-    name: Generate APK
+    name: Starting Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Restore Gradle cache
-        uses: actions/cache@v2.1.4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: ${{ runner.os }}-gradle-
+
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Build APK
-        run: bash ./gradlew assembleDebug --stacktrace
+
+      - name: Build Signed APK
+        uses: victorbnl/build-signed-apk@main
+        with:
+          keystore: ${{ secrets.KEYSTORE }}
+          keystore_password: ${{ secrets.KEYSTORE_PASSWORD }}
+          key_alias: ${{ secrets.KEYSTORE_ALIAS }}
+          key_password: ${{ secrets.STORE_PASSWORD }}
+
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
           name: apk
-          path: app/build/outputs/apk/debug/app-debug.apk 
+          path: app/build/outputs/apk/debug/app-release.apk
+
       - name: Send Debug APK
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: Sending Debug Apk
-          document: app/build/outputs/apk/debug/app-debug.apk
+          document: app/build/outputs/apk/debug/app-release.apk
