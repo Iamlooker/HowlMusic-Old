@@ -2,12 +2,17 @@ package com.looker.howlmusic.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
@@ -21,7 +26,7 @@ fun SongsCard(
     onClick: () -> Unit,
 ) {
     val cardHeight =
-        (LocalContext.current.resources.displayMetrics.heightPixels / 12).dp / LocalDensity.current.density
+        (LocalContext.current.resources.displayMetrics.heightPixels / 14).dp / LocalDensity.current.density
 
     SongsCard(modifier = modifier, song = song, cardHeight = cardHeight, onClick = onClick)
 }
@@ -50,10 +55,19 @@ fun SongsItem(
     imageSize: Dp,
     onClick: () -> Unit,
 ) {
+
+    val rippleColor = remember {
+        mutableStateOf(Color.Unspecified)
+    }
+
     Row(
         Modifier
             .background(MaterialTheme.colors.background)
-            .clickable(onClick = onClick),
+            .clickable(
+                onClick = onClick,
+                indication = rememberRipple(color = rippleColor.value),
+                interactionSource = MutableInteractionSource()
+            ),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -61,7 +75,9 @@ fun SongsItem(
             data = song.albumArtUri,
             modifier = Modifier.size(imageSize),
             shape = MaterialTheme.shapes.small
-        )
+        ) { color ->
+            rippleColor.value = color
+        }
         SongsItemText(song = song)
     }
 }
