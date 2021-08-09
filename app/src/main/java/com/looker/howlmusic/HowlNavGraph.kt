@@ -45,9 +45,7 @@ fun HowlNavGraph(
         startDestination = startDestination
     ) {
 
-        composable(ON_BOARD) {
-            OnBoardingPage { navController.navigate(HOME_ROUTE) }
-        }
+        composable(ON_BOARD) { OnBoardingPage { navController.navigate(HOME_ROUTE) } }
 
         navigation(
             route = HOME_ROUTE,
