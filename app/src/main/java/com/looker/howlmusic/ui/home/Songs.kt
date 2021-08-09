@@ -30,10 +30,7 @@ fun SongsList(songsList: MutableList<Song>, viewModel: SongsViewModel = viewMode
         )
     ) {
         items(songsList) { song ->
-            SongsCard(modifier = Modifier.padding(10.dp), song = song) {
-                val player = viewModel.exoPlayer()
-                viewModel.playSong(player, song)
-            }
+            SongsCard(modifier = Modifier.padding(10.dp), song = song) {}
         }
     }
 }

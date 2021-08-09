@@ -5,6 +5,10 @@ import android.provider.MediaStore
 
 object Constants {
 
+    const val NOTIFICATION_CHANNEL_ID = "music"
+    const val NOTIFICATION_CHANNEL_NAME = "Music"
+    const val NOTIFICATION_ID = 1
+
     val permission = arrayOf(
         android.Manifest.permission.READ_EXTERNAL_STORAGE
     )
