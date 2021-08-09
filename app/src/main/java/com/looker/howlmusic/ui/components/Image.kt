@@ -55,7 +55,7 @@ fun HowlImage(
             val result = (imageLoader.execute(request)).drawable
 
             if (result != null) {
-                extractedColor = result.calcDominantColor()
+                extractedColor = result.getColorPalette()
             }
             vibrantColor(extractedColor)
         }
@@ -77,13 +77,18 @@ fun ImageDefault(
     )
 }
 
-private suspend fun Drawable.calcDominantColor() =
+private suspend fun Drawable.getColorPalette() =
     withContext(Dispatchers.IO) {
         val bmp =
-            (this@calcDominantColor as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true)
+            (this@getColorPalette as BitmapDrawable).bitmap.copy(Bitmap.Config.RGB_565, true)
+        val dominant = Palette
+            .from(bmp)
+            .generate()
+            .getDominantColor(0)
         val vibrant = Palette
             .from(bmp)
             .generate()
             .getVibrantColor(0)
-        Color(vibrant)
+        if (vibrant == 0) Color(dominant)
+        else Color(vibrant)
     }
