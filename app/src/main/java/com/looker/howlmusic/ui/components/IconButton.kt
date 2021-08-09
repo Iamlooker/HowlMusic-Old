@@ -7,6 +7,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.SkipNext
+import androidx.compose.material.icons.filled.SkipPrevious
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -69,5 +72,64 @@ fun ButtonWithIcon(
                 modifier = Modifier.animateContentSize()
             )
         }
+    }
+}
+
+@Composable
+fun PlayButton() {
+    IconButton(
+        onClick = { },
+        modifier = Modifier
+            .size(30.dp)
+            .background(
+                color = MaterialTheme.colors.primary,
+                shape = CircleShape
+            )
+    ) {
+        Icon(
+            imageVector = Icons.Default.PlayArrow,
+            tint = MaterialTheme.colors.onPrimary,
+            contentDescription = null
+        )
+    }
+}
+
+@Composable
+fun NextButton() {
+
+    IconButton(
+        onClick = { },
+        modifier = Modifier
+            .size(30.dp)
+            .background(
+                color = MaterialTheme.colors.surface,
+                shape = CircleShape
+            )
+    ) {
+        Icon(
+            imageVector = Icons.Default.SkipNext,
+            tint = MaterialTheme.colors.onSurface,
+            contentDescription = null
+        )
+    }
+}
+
+@Composable
+fun PrevButton() {
+
+    IconButton(
+        onClick = { },
+        modifier = Modifier
+            .size(30.dp)
+            .background(
+                color = MaterialTheme.colors.surface,
+                shape = CircleShape
+            )
+    ) {
+        Icon(
+            imageVector = Icons.Default.SkipPrevious,
+            tint = MaterialTheme.colors.onSurface,
+            contentDescription = null
+        )
     }
 }
