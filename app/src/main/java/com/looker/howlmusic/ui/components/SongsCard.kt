@@ -36,12 +36,11 @@ private fun SongsCard(
 
     Card(
         modifier = modifier
-            .fillMaxWidth()
-            .clickable { onClick() },
+            .fillMaxWidth(),
         shape = MaterialTheme.shapes.small,
         elevation = 0.dp
     ) {
-        SongsItem(song = song, imageSize = cardHeight)
+        SongsItem(song = song, imageSize = cardHeight, onClick = onClick)
     }
 }
 
@@ -49,9 +48,12 @@ private fun SongsCard(
 fun SongsItem(
     song: Song,
     imageSize: Dp,
+    onClick: () -> Unit,
 ) {
     Row(
-        Modifier.background(MaterialTheme.colors.background),
+        Modifier
+            .background(MaterialTheme.colors.background)
+            .clickable(onClick = onClick),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ) {

@@ -52,16 +52,8 @@ private fun AlbumsCard(
     cardWidth: Dp,
     onAlbumClick: (Long, String?, String?) -> Unit,
 ) {
-    Card(
-        modifier = modifier.clickable {
-            onAlbumClick(
-                album.albumId,
-                album.albumName,
-                album.artistName
-            )
-        }
-    ) {
-        AlbumsItem(album = album, imageSize = cardWidth)
+    Card(modifier = modifier) {
+        AlbumsItem(album = album, imageSize = cardWidth, onAlbumClick = onAlbumClick)
     }
 }
 
@@ -69,6 +61,7 @@ private fun AlbumsCard(
 fun AlbumsItem(
     album: Album,
     imageSize: Dp,
+    onAlbumClick: (Long, String?, String?) -> Unit,
 ) {
 
     var backgroundColor by remember {
@@ -87,7 +80,12 @@ fun AlbumsItem(
     Column(
         modifier = Modifier
             .wrapContentSize()
-            .background(animatedColor),
+            .background(animatedColor)
+            .clickable(onClick = {
+                onAlbumClick(album.albumId,
+                    album.albumName,
+                    album.artistName)
+            }),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
