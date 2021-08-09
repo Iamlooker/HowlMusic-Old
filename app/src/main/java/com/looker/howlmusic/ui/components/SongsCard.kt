@@ -19,14 +19,11 @@ fun SongsCard(
     modifier: Modifier = Modifier,
     song: Song,
     onClick: () -> Unit,
-    precedingIcons: @Composable () -> Unit = {},
 ) {
     val cardHeight =
         (LocalContext.current.resources.displayMetrics.heightPixels / 12).dp / LocalDensity.current.density
 
-    SongsCard(modifier = modifier, song = song, cardHeight = cardHeight, onClick = onClick) {
-        precedingIcons()
-    }
+    SongsCard(modifier = modifier, song = song, cardHeight = cardHeight, onClick = onClick)
 }
 
 @Composable
@@ -35,7 +32,6 @@ private fun SongsCard(
     song: Song,
     cardHeight: Dp,
     onClick: () -> Unit,
-    precedingIcons: @Composable () -> Unit = {},
 ) {
 
     Card(
@@ -43,16 +39,9 @@ private fun SongsCard(
             .fillMaxWidth()
             .clickable { onClick() },
         shape = MaterialTheme.shapes.small,
-        elevation = 0.dp,
-        backgroundColor = MaterialTheme.colors.background
+        elevation = 0.dp
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            SongsItem(song = song, imageSize = cardHeight)
-            precedingIcons()
-        }
+        SongsItem(song = song, imageSize = cardHeight)
     }
 }
 
