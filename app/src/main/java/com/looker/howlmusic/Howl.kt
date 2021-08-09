@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.insets.navigationBarsPadding
 import com.looker.howlmusic.ui.components.BottomNavigation
 import com.looker.howlmusic.ui.home.HomeSections
 import com.looker.howlmusic.ui.theme.HowlMusicTheme
@@ -21,7 +22,8 @@ fun HowlApp() {
         Scaffold(
             bottomBar = {
                 BottomNavigation(navController = navController, items = items)
-            }
+            },
+            modifier = Modifier.navigationBarsPadding()
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
                 HowlNavGraph(navController)
