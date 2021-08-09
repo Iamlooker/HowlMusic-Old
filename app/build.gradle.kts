@@ -61,7 +61,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.3.1")
 
     //Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1")
 
     //Exoplayer
     implementation("com.google.android.exoplayer:exoplayer:2.14.2")

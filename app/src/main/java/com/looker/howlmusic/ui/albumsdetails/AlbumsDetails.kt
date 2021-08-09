@@ -167,5 +167,7 @@ fun AlbumsHeaderText(albumName: String?, artistName: String?) {
 fun AlbumsDetailsList(
     list: MutableList<Song>,
 ) {
-    SongsList(songsList = list)
+    SongsList(songsList = list) {
+
+    }
 }
