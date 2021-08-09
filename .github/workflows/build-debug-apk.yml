@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: apk
-          path: app/build/outputs/apk/debug/app-release.apk
+          path: app/build/outputs/apk/release/app-release.apk
 
       - name: Send Release APK
         uses: appleboy/telegram-action@master
@@ -39,4 +39,4 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: Sending Release Apk
-          document: app/build/outputs/apk/debug/app-release.apk
+          document: app/build/outputs/apk/release/app-release.apk
