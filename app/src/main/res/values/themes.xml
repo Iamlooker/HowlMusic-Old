@@ -1,10 +1,8 @@
 <resources>
-    <style name="Theme.HowlMusic" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.HowlMusic" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/orange</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="colorSecondary">@color/sky</item>
         <item name="android:colorBackground">@color/pure_white</item>
-        <item name="colorOnBackground">@color/white</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 

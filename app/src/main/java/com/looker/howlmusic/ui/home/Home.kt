@@ -13,7 +13,7 @@ import com.looker.howlmusic.R
 fun NavGraphBuilder.addHomeGraph(
     onAlbumClicked: (Long, String?, String?, NavBackStackEntry) -> Unit,
 ) {
-
+    composable(HomeSections.SONGS.route) { Songs() }
     composable(HomeSections.ALBUMS.route) { from ->
         Albums(
             onAlbumClick = { albumId, albumName, artistName ->
@@ -21,10 +21,6 @@ fun NavGraphBuilder.addHomeGraph(
             }
         )
     }
-    composable(HomeSections.SONGS.route) {
-        Songs()
-    }
-
 }
 
 enum class HomeSections(
@@ -32,6 +28,6 @@ enum class HomeSections(
     val icon: ImageVector,
     val route: String,
 ) {
-    ALBUMS(R.string.albums, Icons.Rounded.Album, "home/albums"),
-    SONGS(R.string.songs, Icons.Rounded.MusicNote, "home/songs")
+    SONGS(R.string.songs, Icons.Rounded.MusicNote, "home/songs"),
+    ALBUMS(R.string.albums, Icons.Rounded.Album, "home/albums")
 }

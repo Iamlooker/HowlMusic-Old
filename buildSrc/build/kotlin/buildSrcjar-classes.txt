@@ -1,0 +1,1 @@
+D:\System\Documents\AndroidProjects\Compose\HowlMusic\buildSrc\build\classes\kotlin\main\Libraries.class;D:\System\Documents\AndroidProjects\Compose\HowlMusic\buildSrc\build\classes\kotlin\main\Versions.class
