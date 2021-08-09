@@ -1,7 +1,6 @@
 package com.looker.howlmusic
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavBackStackEntry
@@ -34,7 +33,6 @@ object MainDestinations {
 
 @Composable
 fun HowlNavGraph(
-    modifier: Modifier,
     navController: NavHostController = rememberNavController(),
 ) {
 
@@ -44,8 +42,7 @@ fun HowlNavGraph(
 
     NavHost(
         navController = navController,
-        startDestination = startDestination,
-        modifier = modifier
+        startDestination = startDestination
     ) {
 
         composable(ON_BOARD) {
@@ -54,7 +51,7 @@ fun HowlNavGraph(
 
         navigation(
             route = HOME_ROUTE,
-            startDestination = HomeSections.ALBUMS.route,
+            startDestination = HomeSections.SONGS.route,
         ) {
             addHomeGraph(
                 onAlbumClicked = { albumId, albumName, artistName, from: NavBackStackEntry ->

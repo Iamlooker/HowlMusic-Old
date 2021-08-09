@@ -24,7 +24,7 @@ fun HowlApp() {
             }
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
-                HowlNavGraph(Modifier, navController)
+                HowlNavGraph(navController)
             }
         }
     }
