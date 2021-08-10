@@ -28,11 +28,14 @@ jobs:
         with:
           java-version: 11
 
-      - name: Build Signed APK
+      - name: Build Release APK
+        run: bash ./gradlew assembleRelease --stacktrace
+
+      - name: Sign APK
         uses: r0adkll/sign-android-release@v1
         id: app-release
         with:
-          releaseDirectory: app\build\outputs\apk\release
+          releaseDirectory: build/outputs/apk/release
           signingKeyBase64: ${{ secrets.KEYSTORE }}
           alias: ${{ secrets.KEYSTORE_ALIAS }}
           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
