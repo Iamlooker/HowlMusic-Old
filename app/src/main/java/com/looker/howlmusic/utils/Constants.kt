@@ -5,8 +5,8 @@ import android.provider.MediaStore
 
 object Constants {
 
-    const val NOTIFICATION_CHANNEL_ID = "music"
-    const val NOTIFICATION_CHANNEL_NAME = "Music"
+    const val NOTIFICATION_CHANNEL_ID = "music_player"
+    const val NOTIFICATION_CHANNEL_NAME = "Music Player"
     const val NOTIFICATION_ID = 1
 
     val permission = arrayOf(
@@ -20,14 +20,15 @@ object Constants {
     )
 
     val songProjection = arrayOf(
+        MediaStore.Audio.Media._ID,
+        MediaStore.Audio.Media.ALBUM_ID,
         MediaStore.Audio.Media.TITLE,
         MediaStore.Audio.Media.ARTIST,
-        MediaStore.Audio.Media.ALBUM_ID,
-        MediaStore.Audio.Media.DURATION,
-        MediaStore.Audio.Media._ID
+        MediaStore.Audio.Media.DURATION
     )
 
-    val artworkUri: Uri = Uri.parse("content://media/external/audio/albumart")
+    val Long.artworkUri: Uri
+        get() = Uri.parse("content://media/external/audio/albumart/$this")
 
     val externalUri: Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
 

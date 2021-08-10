@@ -1,6 +1,5 @@
 package com.looker.howlmusic.ui.components
 
-import android.content.ContentUris
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.animateDpAsState
@@ -17,7 +16,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.looker.howlmusic.model.Album
-import com.looker.howlmusic.utils.Constants
+import com.looker.howlmusic.utils.Constants.artworkUri
 import com.looker.howlmusic.utils.Constants.fadeInDuration
 
 @Composable
@@ -75,8 +74,6 @@ fun AlbumsItem(
         )
     )
 
-    val albumArtUri = ContentUris.withAppendedId(Constants.artworkUri, album.albumId)
-
     Column(
         modifier = Modifier
             .wrapContentSize()
@@ -90,7 +87,7 @@ fun AlbumsItem(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         HowlImage(
-            data = albumArtUri,
+            data = album.albumId.artworkUri,
             modifier = Modifier.size(imageSize)
         ) { vibrantColor ->
             backgroundColor = vibrantColor.copy(0.4f)

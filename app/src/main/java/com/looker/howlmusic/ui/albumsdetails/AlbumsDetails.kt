@@ -1,6 +1,5 @@
 package com.looker.howlmusic.ui.albumsdetails
 
-import android.content.ContentUris
 import android.net.Uri
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.TweenSpec
@@ -21,7 +20,7 @@ import com.looker.howlmusic.ui.components.HowlImage
 import com.looker.howlmusic.ui.components.Up
 import com.looker.howlmusic.ui.home.SongsList
 import com.looker.howlmusic.ui.theme.Typography
-import com.looker.howlmusic.utils.Constants
+import com.looker.howlmusic.utils.Constants.artworkUri
 import com.looker.howlmusic.utils.Constants.fadeInDuration
 import com.looker.howlmusic.viewmodels.AlbumsViewModel
 
@@ -36,7 +35,7 @@ fun AlbumsDetails(
 
     Up(iconTint = Color.Black, upPress = upPress)
 
-    val albumArtUri = ContentUris.withAppendedId(Constants.artworkUri, albumId)
+    val albumArtUri = albumId.artworkUri
 
     AlbumsDetails(
         albumArtUri = albumArtUri,

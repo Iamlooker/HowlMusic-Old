@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.looker.howlmusic.model.Song
+import com.looker.howlmusic.utils.Constants.artworkUri
 
 @Composable
 fun SongsCard(
@@ -72,7 +73,7 @@ fun SongsItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         HowlImage(
-            data = song.albumArtUri,
+            data = song.albumId.artworkUri,
             modifier = Modifier.size(imageSize),
             shape = MaterialTheme.shapes.small
         ) { color ->
