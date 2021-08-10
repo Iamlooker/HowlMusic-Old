@@ -35,7 +35,7 @@ jobs:
         uses: r0adkll/sign-android-release@v1
         id: app-release
         with:
-          releaseDirectory: build/outputs/apk/release
+          releaseDirectory: app/build/outputs/apk/release
           signingKeyBase64: ${{ secrets.KEYSTORE }}
           alias: ${{ secrets.KEYSTORE_ALIAS }}
           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
