@@ -2,13 +2,12 @@ package com.looker.howlmusic.data
 
 import android.content.Context
 import android.database.Cursor
-import android.net.Uri
 import com.looker.howlmusic.model.Song
 import com.looker.howlmusic.utils.Constants.externalUri
 import com.looker.howlmusic.utils.Constants.isMusic
+import com.looker.howlmusic.utils.Constants.pathUri
 import com.looker.howlmusic.utils.Constants.songProjection
 import com.looker.howlmusic.utils.Constants.sortOrderSong
-import java.io.File
 
 class SongsData(private val context: Context) {
 
@@ -36,7 +35,7 @@ class SongsData(private val context: Context) {
                 val songName = songCursor.getString(2)
                 val artistName = songCursor.getString(3)
                 val songDurationMillis = songCursor.getInt(4)
-                val songUri = Uri.parse(externalUri.toString() + File.separator + songId)
+                val songUri = songId.pathUri
                 list.add(Song(songUri, albumId, songName, artistName, songDurationMillis))
             } while (songCursor.moveToNext())
         }

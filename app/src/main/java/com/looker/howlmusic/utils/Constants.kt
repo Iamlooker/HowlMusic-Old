@@ -27,15 +27,18 @@ object Constants {
         MediaStore.Audio.Media.DURATION
     )
 
-    val Long.artworkUri: Uri
-        get() = Uri.parse("content://media/external/audio/albumart/$this")
-
     val externalUri: Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
 
     const val isMusic: String = MediaStore.Audio.Media.IS_MUSIC + " != 0"
 
     const val sortOrderAlbum: String = MediaStore.Audio.Media.ALBUM + " COLLATE NOCASE ASC"
     const val sortOrderSong: String = MediaStore.Audio.Media.TITLE + " COLLATE NOCASE ASC"
+
+    val Long.artworkUri: Uri
+        get() = Uri.parse("content://media/external/audio/albumart/$this")
+
+    val Long.pathUri: Uri
+        get() = Uri.parse("$externalUri/$this")
 
     const val fadeInDuration = 500
 }
