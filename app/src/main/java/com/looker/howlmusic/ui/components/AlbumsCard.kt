@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.looker.howlmusic.model.Album
+import com.looker.howlmusic.ui.theme.Typography
 import com.looker.howlmusic.utils.Constants.artworkUri
 import com.looker.howlmusic.utils.Constants.fadeInDuration
 
@@ -102,9 +103,7 @@ fun AlbumsItem(
 }
 
 @Composable
-fun AlbumsItemText(
-    album: Album,
-) {
-    HeaderText(text = album.albumName)
-    BodyText(text = album.artistName)
+fun AlbumsItemText(album: Album) {
+    WrappedText(text = album.albumName)
+    WrappedText(text = album.artistName, style = Typography.body2)
 }

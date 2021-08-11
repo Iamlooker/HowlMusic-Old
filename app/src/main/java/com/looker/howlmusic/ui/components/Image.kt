@@ -26,7 +26,7 @@ import kotlinx.coroutines.withContext
 fun HowlImage(
     modifier: Modifier = Modifier,
     data: Uri?,
-    size: Int = 250,
+    size: Int = 600,
     shape: CornerBasedShape = MaterialTheme.shapes.medium,
     vibrantColor: (Color) -> Unit = {},
 ) {

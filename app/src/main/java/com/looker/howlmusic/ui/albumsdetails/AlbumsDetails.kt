@@ -14,10 +14,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.insets.statusBarsHeight
 import com.looker.howlmusic.model.Song
-import com.looker.howlmusic.ui.components.BodyText
-import com.looker.howlmusic.ui.components.HeaderText
 import com.looker.howlmusic.ui.components.HowlImage
 import com.looker.howlmusic.ui.components.Up
+import com.looker.howlmusic.ui.components.WrappedText
 import com.looker.howlmusic.ui.home.SongsList
 import com.looker.howlmusic.ui.theme.Typography
 import com.looker.howlmusic.utils.Constants.artworkUri
@@ -152,12 +151,13 @@ fun AlbumsHeaderText(albumName: String?, artistName: String?) {
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        HeaderText(
+        WrappedText(
             text = albumName,
             style = Typography.h5
         )
-        BodyText(
-            text = artistName
+        WrappedText(
+            text = artistName,
+            style = Typography.body2
         )
     }
 }
