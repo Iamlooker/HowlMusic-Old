@@ -5,7 +5,9 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -21,7 +23,9 @@ import com.looker.howlmusic.ui.home.SongsList
 import com.looker.howlmusic.ui.theme.Typography
 import com.looker.howlmusic.utils.Constants.artworkUri
 import com.looker.howlmusic.utils.Constants.fadeInDuration
+import com.looker.howlmusic.utils.rememberDominantColorState
 import com.looker.howlmusic.viewmodels.AlbumsViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun AlbumsDetails(
@@ -67,12 +71,16 @@ fun AlbumsView(
     artistName: String?,
     list: MutableList<Song>,
 ) {
-    var backgroundGradient by remember {
-        mutableStateOf(Color.Transparent)
+    val backgroundGradient = rememberDominantColorState()
+
+    LaunchedEffect(albumArtUri) {
+        launch {
+            backgroundGradient.updateColorsFromImageUrl(albumArtUri.toString())
+        }
     }
 
     val animateBackgroundGradient by animateColorAsState(
-        targetValue = backgroundGradient,
+        targetValue = backgroundGradient.color,
         animationSpec = TweenSpec(
             durationMillis = fadeInDuration
         )
@@ -83,9 +91,7 @@ fun AlbumsView(
             albumArtUri = albumArtUri,
             albumName = albumName,
             artistName = artistName
-        ) {
-            backgroundGradient = it
-        }
+        )
         AlbumsDetailsList(list)
     }
 
@@ -96,7 +102,6 @@ fun AlbumsHeader(
     albumArtUri: Uri,
     albumName: String?,
     artistName: String?,
-    getColor: (Color) -> Unit,
 ) {
 
     Column(
@@ -104,9 +109,7 @@ fun AlbumsHeader(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(15.dp)
     ) {
-        HowlImage(data = albumArtUri) { vibrantColor ->
-            getColor(vibrantColor.copy(0.4f))
-        }
+        HowlImage(data = albumArtUri)
         AlbumsHeaderText(albumName = albumName, artistName = artistName)
     }
 }

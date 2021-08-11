@@ -7,10 +7,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
@@ -19,6 +20,8 @@ import com.looker.howlmusic.model.Album
 import com.looker.howlmusic.ui.theme.Typography
 import com.looker.howlmusic.utils.Constants.artworkUri
 import com.looker.howlmusic.utils.Constants.fadeInDuration
+import com.looker.howlmusic.utils.rememberDominantColorState
+import kotlinx.coroutines.launch
 
 @Composable
 fun AlbumsCard(
@@ -26,7 +29,7 @@ fun AlbumsCard(
     modifier: Modifier = Modifier,
     columnCount: Int,
     showImage: Boolean,
-    onAlbumClick: (Long, String?, String?) -> Unit,
+    onAlbumClick: (Album) -> Unit,
 ) {
     val cardWidth by
     animateDpAsState(
@@ -50,7 +53,7 @@ private fun AlbumsCard(
     modifier: Modifier = Modifier,
     album: Album,
     cardWidth: Dp,
-    onAlbumClick: (Long, String?, String?) -> Unit,
+    onAlbumClick: (Album) -> Unit,
 ) {
     Card(modifier = modifier) {
         AlbumsItem(album = album, imageSize = cardWidth, onAlbumClick = onAlbumClick)
@@ -61,15 +64,21 @@ private fun AlbumsCard(
 fun AlbumsItem(
     album: Album,
     imageSize: Dp,
-    onAlbumClick: (Long, String?, String?) -> Unit,
+    onAlbumClick: (Album) -> Unit,
 ) {
 
-    var backgroundColor by remember {
-        mutableStateOf(Color.Transparent)
+    val backgroundColor = rememberDominantColorState()
+
+    val albumArtUri = album.albumId.artworkUri
+
+    LaunchedEffect(albumArtUri) {
+        launch {
+            backgroundColor.updateColorsFromImageUrl(albumArtUri.toString())
+        }
     }
 
     val animatedColor by animateColorAsState(
-        targetValue = backgroundColor,
+        targetValue = backgroundColor.color.copy(0.3f),
         animationSpec = TweenSpec(
             durationMillis = fadeInDuration
         )
@@ -80,9 +89,7 @@ fun AlbumsItem(
             .wrapContentSize()
             .background(animatedColor)
             .clickable(onClick = {
-                onAlbumClick(album.albumId,
-                    album.albumName,
-                    album.artistName)
+                onAlbumClick(album)
             }),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -90,9 +97,7 @@ fun AlbumsItem(
         HowlImage(
             data = album.albumId.artworkUri,
             modifier = Modifier.size(imageSize)
-        ) { vibrantColor ->
-            backgroundColor = vibrantColor.copy(0.4f)
-        }
+        )
         AlbumsItemText(album = album)
         Spacer(
             modifier = Modifier

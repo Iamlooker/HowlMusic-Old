@@ -2,6 +2,7 @@ package com.looker.howlmusic.ui.onboarding
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,7 +26,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.looker.howlmusic.R
 import com.looker.howlmusic.ui.components.ButtonWithIcon
-import com.looker.howlmusic.ui.components.ImageDefault
 import com.looker.howlmusic.utils.Constants.fadeInDuration
 import com.looker.howlmusic.utils.handlePermissions
 import com.looker.howlmusic.viewmodels.HowlViewModel
@@ -135,8 +135,9 @@ fun OnBoardContent(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            ImageDefault(
-                painter = painter
+            Image(
+                painter = painter,
+                contentDescription = null
             )
 
             Text(

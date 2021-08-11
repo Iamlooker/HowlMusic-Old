@@ -52,10 +52,10 @@ fun HowlNavGraph(
             startDestination = HomeSections.SONGS.route,
         ) {
             addHomeGraph(
-                onAlbumClicked = { albumId, albumName, artistName, from: NavBackStackEntry ->
+                onAlbumClicked = { album, from: NavBackStackEntry ->
                     if (from.lifecycleIsResumed()) {
                         navController
-                            .navigate("${MainDestinations.ALBUMS_DETAILS_ROUTE}/$albumId/$albumName/$artistName")
+                            .navigate("${MainDestinations.ALBUMS_DETAILS_ROUTE}/${album.albumId}/${album.albumName}/${album.artistName}")
                     }
                 }
             )

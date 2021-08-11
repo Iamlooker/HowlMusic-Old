@@ -21,7 +21,7 @@ fun Songs(viewModel: SongsViewModel = viewModel()) {
 }
 
 @Composable
-fun SongsList(songsList: MutableList<Song>, onSongClick: () -> Unit) {
+fun SongsList(songsList: List<Song>, onSongClick: () -> Unit) {
 
     LazyColumn(
         contentPadding = rememberInsetsPaddingValues(
