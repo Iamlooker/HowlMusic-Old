@@ -31,6 +31,15 @@ jobs:
       - name: Build Release APK
         run: bash ./gradlew assembleRelease --stacktrace
 
+      - name: Sign APK
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.KEYSTORE }}
+          alias: ${{ secrets.KEYSTORE_ALIAS }}
+          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.STORE_PASSWORD }}
+
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
