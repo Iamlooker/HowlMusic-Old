@@ -26,6 +26,7 @@ import kotlinx.coroutines.withContext
 fun HowlImage(
     modifier: Modifier = Modifier,
     data: Uri?,
+    size: Int = 250,
     shape: CornerBasedShape = MaterialTheme.shapes.medium,
     vibrantColor: (Color) -> Unit = {},
 ) {
@@ -42,6 +43,7 @@ fun HowlImage(
 
     val request = ImageRequest.Builder(context)
         .data(data = data)
+        .size(size)
         .crossfade(fadeInDuration)
         .build()
 

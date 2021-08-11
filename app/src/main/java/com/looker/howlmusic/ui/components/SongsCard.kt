@@ -75,6 +75,7 @@ fun SongsItem(
         HowlImage(
             data = song.albumId.artworkUri,
             modifier = Modifier.size(imageSize),
+            size = 50,
             shape = MaterialTheme.shapes.small
         ) { color ->
             rippleColor.value = color
