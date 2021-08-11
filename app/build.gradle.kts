@@ -2,6 +2,10 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
 }
+val insetsVersion by extra("0.16.1")
+val composeVersion by extra("1.0.1")
+val lifecycleVersion by extra("2.3.1")
+
 
 android {
     compileSdk = 30
@@ -40,7 +44,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = rootProject.extra["compose_version"].toString()
+        kotlinCompilerExtensionVersion = composeVersion
     }
 }
 
@@ -50,8 +54,8 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.3.1")
 
     //Accompanist
-    implementation("com.google.accompanist:accompanist-insets:0.16.1")
-    implementation("com.google.accompanist:accompanist-insets-ui:0.16.1")
+    implementation("com.google.accompanist:accompanist-insets:$insetsVersion")
+    implementation("com.google.accompanist:accompanist-insets-ui:$insetsVersion")
 
     //Coil
     implementation("io.coil-kt:coil-compose:1.3.2")
@@ -67,8 +71,8 @@ dependencies {
     implementation("com.google.android.exoplayer:exoplayer:2.14.2")
 
     //Material
-    implementation("androidx.compose.material:material:${rootProject.extra["compose_version"]}")
-    implementation("androidx.compose.material:material-icons-extended:${rootProject.extra["compose_version"]}")
+    implementation("androidx.compose.material:material:$composeVersion")
+    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
 
     //Navigation
     implementation("androidx.navigation:navigation-compose:2.4.0-alpha06")
@@ -77,10 +81,10 @@ dependencies {
     implementation("androidx.palette:palette-ktx:1.0.0")
 
     //UI
-    implementation("androidx.compose.ui:ui:${rootProject.extra["compose_version"]}")
-    implementation("androidx.compose.ui:ui-tooling:${rootProject.extra["compose_version"]}")
+    implementation("androidx.compose.ui:ui:$composeVersion")
+    implementation("androidx.compose.ui:ui-tooling:$composeVersion")
 
     //ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha03")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
 
 }

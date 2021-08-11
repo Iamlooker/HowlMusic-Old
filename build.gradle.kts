@@ -1,8 +1,5 @@
 buildscript {
 
-    val compose_version by extra("1.0.1")
-    val lifecycle_version by extra("2.3.1")
-
     repositories {
         google()
         mavenCentral()
