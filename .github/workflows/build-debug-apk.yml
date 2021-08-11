@@ -28,23 +28,14 @@ jobs:
         with:
           java-version: 11
 
-      - name: Build Release APK
-        run: bash ./gradlew assembleRelease --stacktrace
-
-      - name: Sign APK
-        uses: r0adkll/sign-android-release@v1
-        with:
-          releaseDirectory: app/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.KEYSTORE }}
-          alias: ${{ secrets.KEYSTORE_ALIAS }}
-          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
-          keyPassword: ${{ secrets.STORE_PASSWORD }}
+      - name: Build Debug APK
+        run: bash ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
           name: apk
-          path: app/build/outputs/apk/release/app-release-unsigned.apk
+          path: app/build/outputs/apk/release/app-debug.apk
 
       - name: Send Release APK
         uses: appleboy/telegram-action@master
@@ -52,4 +43,4 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: Sending Release Apk
-          document: app/build/outputs/apk/release/app-release-unsigned.apk
+          document: app/build/outputs/apk/release/app-debug.apk
