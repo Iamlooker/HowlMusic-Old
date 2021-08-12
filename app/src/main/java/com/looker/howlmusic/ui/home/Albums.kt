@@ -1,13 +1,10 @@
 package com.looker.howlmusic.ui.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
@@ -54,7 +51,6 @@ fun AlbumsList(
             AlbumsCard(
                 album = album,
                 columnCount = columnCount,
-                modifier = Modifier.padding(10.dp),
                 onAlbumClick = onAlbumClick,
                 showImage = true
             )

@@ -5,7 +5,10 @@ import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -14,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.looker.howlmusic.model.Album
@@ -39,11 +43,10 @@ fun AlbumsCard(
         } else 0.dp
     )
 
-
     AlbumsCard(
         album = album,
         cardWidth = cardWidth,
-        modifier = modifier,
+        modifier = modifier.padding(10.dp),
         onAlbumClick = onAlbumClick
     )
 }
@@ -62,6 +65,7 @@ private fun AlbumsCard(
 
 @Composable
 fun AlbumsItem(
+    modifier: Modifier = Modifier,
     album: Album,
     imageSize: Dp,
     onAlbumClick: (Album) -> Unit,
@@ -85,30 +89,34 @@ fun AlbumsItem(
     )
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .wrapContentSize()
             .background(animatedColor)
-            .clickable(onClick = {
-                onAlbumClick(album)
-            }),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .clickable { onAlbumClick(album) },
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         HowlImage(
-            data = album.albumId.artworkUri,
+            data = albumArtUri,
             modifier = Modifier.size(imageSize)
         )
-        AlbumsItemText(album = album)
-        Spacer(
-            modifier = Modifier
-                .height(8.dp)
-                .fillMaxWidth()
+        AlbumsItemText(
+            modifier = Modifier.padding(5.dp),
+            album = album
         )
     }
 }
 
 @Composable
-fun AlbumsItemText(album: Album) {
-    WrappedText(text = album.albumName)
-    WrappedText(text = album.artistName, style = Typography.body2)
+fun AlbumsItemText(modifier: Modifier = Modifier, album: Album) {
+    WrappedText(
+        modifier = modifier,
+        text = album.albumName,
+        textAlign = TextAlign.Center
+    )
+    WrappedText(
+        modifier = modifier,
+        text = album.artistName,
+        style = Typography.body2,
+        textAlign = TextAlign.Center
+    )
 }

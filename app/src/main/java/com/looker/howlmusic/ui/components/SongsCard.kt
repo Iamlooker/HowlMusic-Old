@@ -16,14 +16,15 @@ import com.looker.howlmusic.utils.Constants.artworkUri
 
 @Composable
 fun SongsCard(
+    modifier: Modifier = Modifier,
     song: Song,
     onClick: () -> Unit,
 ) {
-    SongsCard(modifier = Modifier.padding(10.dp), song = song, onClick = onClick)
+    SongsItem(modifier = modifier.padding(10.dp), song = song, onClick = onClick)
 }
 
 @Composable
-private fun SongsCard(
+private fun SongsItem(
     modifier: Modifier = Modifier,
     song: Song,
     onClick: () -> Unit,
@@ -40,13 +41,14 @@ private fun SongsCard(
 
 @Composable
 fun SongsItem(
+    modifier: Modifier = Modifier,
     song: Song,
     imageSize: Dp,
     onClick: () -> Unit,
 ) {
 
     Row(
-        Modifier
+        modifier
             .background(MaterialTheme.colors.background)
             .clickable(onClick = onClick),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -63,8 +65,9 @@ fun SongsItem(
 }
 
 @Composable
-fun SongsItemText(song: Song) {
+fun SongsItemText(modifier: Modifier = Modifier, song: Song) {
     Column(
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.Start
     ) {
