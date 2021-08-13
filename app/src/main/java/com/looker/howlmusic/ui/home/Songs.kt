@@ -17,18 +17,13 @@ import com.looker.howlmusic.viewmodels.SongsViewModel
 fun Songs(viewModel: SongsViewModel = viewModel()) {
 
     val songsList = viewModel.songsList
-    val player = SimpleExoPlayer.Builder(LocalContext.current).build()
 
-    SongsList(songsList = songsList) {
-        player.clearMediaItems()
-        player.setMediaItem(MediaItem.fromUri(it.songUri))
-        player.prepare()
-        player.play()
-    }
+    SongsList(songsList = songsList)
 }
 
 @Composable
-fun SongsList(songsList: List<Song>, onSongClick: (Song) -> Unit) {
+fun SongsList(songsList: List<Song>) {
+    val player = SimpleExoPlayer.Builder(LocalContext.current).build()
 
     LazyColumn(
         contentPadding = rememberInsetsPaddingValues(
@@ -38,7 +33,10 @@ fun SongsList(songsList: List<Song>, onSongClick: (Song) -> Unit) {
     ) {
         items(songsList) { song ->
             SongsCard(song = song) {
-                onSongClick(song)
+                player.clearMediaItems()
+                player.setMediaItem(MediaItem.fromUri(it.songUri))
+                player.prepare()
+                player.play()
             }
         }
     }
