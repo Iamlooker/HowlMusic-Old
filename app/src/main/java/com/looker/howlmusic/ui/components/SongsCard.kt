@@ -18,37 +18,43 @@ import com.looker.howlmusic.utils.Constants.artworkUri
 fun SongsCard(
     modifier: Modifier = Modifier,
     song: Song,
+    cardHeight: Dp = 70.dp,
     onClick: (Song) -> Unit,
 ) {
-    SongsItem(modifier = modifier.padding(10.dp), song = song, onClick = onClick)
+    SongsItem(
+        modifier = modifier.padding(10.dp),
+        cardHeight = cardHeight,
+        song = song,
+        onClick = onClick
+    )
 }
 
 @Composable
 private fun SongsItem(
     modifier: Modifier = Modifier,
     song: Song,
+    cardHeight: Dp,
     onClick: (Song) -> Unit,
 ) {
 
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier,
         shape = MaterialTheme.shapes.small,
         elevation = 0.dp
     ) {
-        SongsItem(song = song, imageSize = 70.dp, onClick = onClick)
+        SongsItem(song = song, imageSize = cardHeight, onClick = onClick)
     }
 }
 
 @Composable
 fun SongsItem(
-    modifier: Modifier = Modifier,
     song: Song,
     imageSize: Dp,
     onClick: (Song) -> Unit,
 ) {
 
     Row(
-        modifier
+        Modifier
             .background(MaterialTheme.colors.background)
             .clickable(onClick = { onClick(song) }),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -68,10 +74,10 @@ fun SongsItem(
 fun SongsItemText(modifier: Modifier = Modifier, song: Song) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(10.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.Start
     ) {
         WrappedText(text = song.songName)
-        WrappedText(text = song.artistName, style = Typography.body2)
+        WrappedText(text = song.artistName, style = Typography.caption)
     }
 }

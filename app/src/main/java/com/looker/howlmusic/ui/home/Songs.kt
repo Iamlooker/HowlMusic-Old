@@ -1,8 +1,10 @@
 package com.looker.howlmusic.ui.home
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.insets.LocalWindowInsets
@@ -32,7 +34,7 @@ fun SongsList(songsList: List<Song>) {
         )
     ) {
         items(songsList) { song ->
-            SongsCard(song = song) {
+            SongsCard(modifier = Modifier.fillMaxWidth(), song = song) {
                 player.clearMediaItems()
                 player.setMediaItem(MediaItem.fromUri(it.songUri))
                 player.prepare()
