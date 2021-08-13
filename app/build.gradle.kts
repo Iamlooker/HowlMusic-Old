@@ -70,7 +70,6 @@ dependencies {
 
     //Exoplayer
     implementation("com.google.android.exoplayer:exoplayer-core:$exoplayerVersion")
-    implementation("com.google.android.exoplayer:extension-mediasession:$exoplayerVersion")
 
     //Material
     implementation("androidx.compose.material:material:$composeVersion")
