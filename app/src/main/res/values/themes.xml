@@ -10,6 +10,5 @@
     <style name="Theme.HowlMusic.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowSplashscreenContent">@drawable/ic_launcher_foreground</item>
     </style>
 </resources>
