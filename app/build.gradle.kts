@@ -2,10 +2,11 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
 }
+
 val insetsVersion by extra("0.16.1")
 val composeVersion by extra("1.0.1")
 val lifecycleVersion by extra("2.3.1")
-
+val exoplayerVersion by extra("2.14.2")
 
 android {
     compileSdk = 30
@@ -15,7 +16,7 @@ android {
         minSdk = 29
         targetSdk = 30
         versionCode = 1
-        versionName = "1.0"
+        versionName = "Pegasus"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -68,7 +69,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1")
 
     //Exoplayer
-    implementation("com.google.android.exoplayer:exoplayer:2.14.2")
+    implementation("com.google.android.exoplayer:exoplayer-core:$exoplayerVersion")
+    implementation("com.google.android.exoplayer:extension-mediasession:$exoplayerVersion")
 
     //Material
     implementation("androidx.compose.material:material:$composeVersion")

@@ -1,17 +1,14 @@
 package com.looker.howlmusic.playback
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.*
 import android.app.NotificationManager.IMPORTANCE_HIGH
-import android.app.Service
+import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Icon
 import android.media.MediaMetadata
 import android.media.session.MediaSession
 import android.os.IBinder
-import androidx.core.net.toUri
-import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.RenderersFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.audio.MediaCodecAudioRenderer
@@ -20,7 +17,6 @@ import com.google.android.exoplayer2.mediacodec.MediaCodecSelector
 import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.looker.howlmusic.R
 import com.looker.howlmusic.data.SongsData
-import com.looker.howlmusic.model.Song
 import com.looker.howlmusic.utils.Constants.NOTIFICATION_CHANNEL_ID
 import com.looker.howlmusic.utils.Constants.NOTIFICATION_CHANNEL_NAME
 import com.looker.howlmusic.utils.Constants.NOTIFICATION_ID
@@ -29,29 +25,28 @@ import com.looker.howlmusic.utils.Constants.artworkUri
 
 class PlaybackService : Service() {
 
-    lateinit var player: SimpleExoPlayer
-    val sampleSong: Song = Song(songUri = "content://media/external/audio/media/809".toUri(),
-        albumId = 1472833616896716278,
-        songName = "PLAYING WITH FIRE",
-        artistName = "BLACKPINK",
-        songDurationMillis = 197329)
+    private lateinit var player: SimpleExoPlayer
+
+    private val sampleSong by lazy { SongsData(this).getSongList()[1] }
+    private lateinit var notification: Notification
 
     override fun onCreate() {
         super.onCreate()
         player = newPlayer()
-        val songsList = SongsData(this).getSongList()
-        val mediaItem: ArrayList<MediaItem> = arrayListOf()
-        songsList.forEach {
-            mediaItem.add(MediaItem.fromUri(it.songUri))
-        }
-        player.setMediaItems(mediaItem)
-        player.prepare()
         startForegroundService()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        player.release()
+    private fun newPlayer(): SimpleExoPlayer {
+        val audioRenderer = RenderersFactory { handler, _, audioListener, _, _ ->
+            arrayOf(
+                MediaCodecAudioRenderer(this, MediaCodecSelector.DEFAULT, handler, audioListener)
+            )
+        }
+        val extractorsFactory = DefaultExtractorsFactory().setConstantBitrateSeekingEnabled(true)
+
+        return SimpleExoPlayer.Builder(this, audioRenderer)
+            .setMediaSourceFactory(DefaultMediaSourceFactory(this, extractorsFactory))
+            .build()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int = START_NOT_STICKY
@@ -77,11 +72,39 @@ class PlaybackService : Service() {
                 .build()
         )
 
-        val notificationBuilder = Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
+        notification = Notification.Builder(this, NOTIFICATION_CHANNEL_ID)
             .setStyle(mediaStyle)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .build()
 
-        startForeground(NOTIFICATION_ID, notificationBuilder.build())
+        val pendingIntent = PendingIntent.getService(
+            this,
+            NOTIFICATION_ID,
+            Intent(),
+            FLAG_ONE_SHOT
+        )
+
+        val playAction = Notification.Action.Builder(
+            Icon.createWithResource(this, R.drawable.ic_play),
+            "play",
+            pendingIntent
+        ).build()
+
+        val nextAction = Notification.Action.Builder(
+            Icon.createWithResource(this, R.drawable.ic_next),
+            "play",
+            pendingIntent
+        ).build()
+
+        val previousAction = Notification.Action.Builder(
+            Icon.createWithResource(this, R.drawable.ic_previous),
+            "play",
+            pendingIntent
+        ).build()
+
+        notification.actions = arrayOf(previousAction, playAction, nextAction)
+
+        startForeground(NOTIFICATION_ID, notification)
     }
 
 
@@ -94,16 +117,8 @@ class PlaybackService : Service() {
         notificationManager.createNotificationChannel(channel)
     }
 
-    private fun newPlayer(): SimpleExoPlayer {
-        val audioRenderer = RenderersFactory { handler, _, audioListener, _, _ ->
-            arrayOf(
-                MediaCodecAudioRenderer(this, MediaCodecSelector.DEFAULT, handler, audioListener)
-            )
-        }
-        val extractorsFactory = DefaultExtractorsFactory().setConstantBitrateSeekingEnabled(true)
-
-        return SimpleExoPlayer.Builder(this, audioRenderer)
-            .setMediaSourceFactory(DefaultMediaSourceFactory(this, extractorsFactory))
-            .build()
+    override fun onDestroy() {
+        super.onDestroy()
+        player.release()
     }
 }
