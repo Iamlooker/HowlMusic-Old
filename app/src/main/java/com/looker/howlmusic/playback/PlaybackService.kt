@@ -27,14 +27,14 @@ class PlaybackService : Service() {
 
     private lateinit var player: SimpleExoPlayer
 
-    private val sampleSong by lazy { SongsData(this).getSongList()[1] }
     private lateinit var notification: Notification
-
     override fun onCreate() {
         super.onCreate()
         player = newPlayer()
         startForegroundService()
     }
+
+    private val sampleSong by lazy { SongsData(this).getSongList()[0] }
 
     private fun newPlayer(): SimpleExoPlayer {
         val audioRenderer = RenderersFactory { handler, _, audioListener, _, _ ->

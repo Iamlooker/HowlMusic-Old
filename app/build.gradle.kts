@@ -69,7 +69,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1")
 
     //Exoplayer
-    implementation("com.google.android.exoplayer:exoplayer-core:$exoplayerVersion")
+    implementation("com.google.android.exoplayer:exoplayer:$exoplayerVersion")
 
     //Material
     implementation("androidx.compose.material:material:$composeVersion")
