@@ -5,9 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.looker.howlmusic.ui.home.HomeSections
 
@@ -44,11 +42,4 @@ fun BottomNavigation(navController: NavController, items: Array<HomeSections>) {
             }
         }
     }
-}
-
-private val NavGraph.startDestination: NavDestination?
-    get() = findNode(startDestinationId)
-
-private tailrec fun findStartDestination(graph: NavDestination): NavDestination {
-    return if (graph is NavGraph) findStartDestination(graph.startDestination!!) else graph
 }
