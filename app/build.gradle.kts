@@ -56,20 +56,18 @@ dependencies {
 
     //Accompanist
     implementation("com.google.accompanist:accompanist-insets:$insetsVersion")
-    implementation("com.google.accompanist:accompanist-insets-ui:$insetsVersion")
 
     //Coil
     implementation("io.coil-kt:coil-compose:1.3.2")
 
     //Core
     implementation("androidx.core:core-ktx:1.6.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
 
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1")
 
     //Exoplayer
-    implementation("com.google.android.exoplayer:exoplayer:$exoplayerVersion")
+    implementation("com.google.android.exoplayer:exoplayer-core:$exoplayerVersion")
 
     //Material
     implementation("androidx.compose.material:material:$composeVersion")
