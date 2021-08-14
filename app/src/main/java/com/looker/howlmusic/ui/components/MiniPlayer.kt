@@ -24,7 +24,7 @@ fun MiniPlayer(modifier: Modifier = Modifier, song: Song) {
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceAround,
+            horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
             SongsCard(

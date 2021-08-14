@@ -42,7 +42,13 @@ private fun SongsItem(
         shape = MaterialTheme.shapes.small,
         elevation = 0.dp
     ) {
-        SongsItem(song = song, imageSize = cardHeight, onClick = onClick)
+        Row(
+            Modifier
+                .background(MaterialTheme.colors.background)
+                .clickable(onClick = { onClick(song) }),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) { SongsItem(song = song, imageSize = cardHeight) }
     }
 }
 
@@ -50,24 +56,14 @@ private fun SongsItem(
 fun SongsItem(
     song: Song,
     imageSize: Dp,
-    onClick: (Song) -> Unit,
 ) {
-
-    Row(
-        Modifier
-            .background(MaterialTheme.colors.background)
-            .clickable(onClick = { onClick(song) }),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        HowlImage(
-            data = song.albumId.artworkUri,
-            modifier = Modifier.size(imageSize),
-            size = 50,
-            shape = MaterialTheme.shapes.small
-        )
-        SongsItemText(song = song)
-    }
+    HowlImage(
+        data = song.albumId.artworkUri,
+        modifier = Modifier.size(imageSize),
+        size = 50,
+        shape = MaterialTheme.shapes.small
+    )
+    SongsItemText(song = song)
 }
 
 @Composable
