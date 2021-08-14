@@ -12,9 +12,7 @@ import android.os.IBinder
 import com.google.android.exoplayer2.RenderersFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.audio.MediaCodecAudioRenderer
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
 import com.google.android.exoplayer2.mediacodec.MediaCodecSelector
-import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
 import com.looker.howlmusic.R
 import com.looker.howlmusic.data.SongsData
 import com.looker.howlmusic.utils.Constants.NOTIFICATION_CHANNEL_ID
@@ -42,11 +40,8 @@ class PlaybackService : Service() {
                 MediaCodecAudioRenderer(this, MediaCodecSelector.DEFAULT, handler, audioListener)
             )
         }
-        val extractorsFactory = DefaultExtractorsFactory().setConstantBitrateSeekingEnabled(true)
 
-        return SimpleExoPlayer.Builder(this, audioRenderer)
-            .setMediaSourceFactory(DefaultMediaSourceFactory(this, extractorsFactory))
-            .build()
+        return SimpleExoPlayer.Builder(this, audioRenderer).build()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int = START_NOT_STICKY
