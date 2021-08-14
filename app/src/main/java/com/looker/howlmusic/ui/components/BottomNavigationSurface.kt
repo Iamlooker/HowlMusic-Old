@@ -38,9 +38,6 @@ fun BottomNavigation(navController: NavController, items: Array<HomeSections>) {
                         navController.navigate(screen.route) {
                             launchSingleTop = true
                             restoreState = true
-                            popUpTo(findStartDestination(navController.graph).id) {
-                                saveState = true
-                            }
                         }
                     }
                 )

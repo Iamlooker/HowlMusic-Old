@@ -2,7 +2,7 @@ package com.looker.howlmusic.playback
 
 import android.app.*
 import android.app.NotificationManager.IMPORTANCE_HIGH
-import android.app.PendingIntent.FLAG_ONE_SHOT
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
@@ -81,7 +81,7 @@ class PlaybackService : Service() {
             this,
             NOTIFICATION_ID,
             Intent(),
-            FLAG_ONE_SHOT
+            FLAG_IMMUTABLE
         )
 
         val playAction = Notification.Action.Builder(
