@@ -6,7 +6,7 @@ plugins {
 val insetsVersion by extra("0.16.1")
 val composeVersion by extra("1.0.1")
 val lifecycleVersion by extra("2.3.1")
-val exoplayerVersion by extra("2.14.2")
+val exoplayerVersion by extra("2.15.0")
 
 android {
     compileSdk = 30
