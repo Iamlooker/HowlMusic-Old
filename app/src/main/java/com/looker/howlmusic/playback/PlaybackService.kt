@@ -15,7 +15,7 @@ import com.looker.howlmusic.utils.Constants.NOTIFICATION_ID
 
 class PlaybackService : Service() {
 
-    lateinit var player: SimpleExoPlayer
+    private lateinit var player: SimpleExoPlayer
 
     private lateinit var mediaSession: MediaSession
     private lateinit var mediaSessionConnector: MediaSessionConnector
