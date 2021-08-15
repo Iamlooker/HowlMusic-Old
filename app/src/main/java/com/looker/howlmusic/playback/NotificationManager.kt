@@ -23,7 +23,7 @@ import com.looker.howlmusic.utils.Constants.NOTIFICATION_ID
 class PlaybackNotification private constructor(
     context: Context,
     mediaToken: MediaSession.Token,
-    currentSong: Song,
+    currentSong: Song?,
 ) : Notification.Builder(context, NOTIFICATION_CHANNEL_ID) {
 
     private val pendingIntent = PendingIntent.getService(
@@ -37,9 +37,9 @@ class PlaybackNotification private constructor(
         setSmallIcon(R.drawable.ic_launcher_foreground)
         setCategory(CATEGORY_SERVICE)
         setShowWhen(false)
-        setLargeIcon(currentSong.albumId.bitmap(context))
-        setContentTitle(currentSong.songName)
-        setContentText(currentSong.artistName)
+        setLargeIcon(currentSong?.albumId.bitmap(context))
+        setContentTitle(currentSong?.songName)
+        setContentText(currentSong?.artistName)
         setContentIntent(pendingIntent)
         setVisibility(VISIBILITY_PUBLIC)
         addAction(buildAction(context, ACTION_SKIP_TO_PREVIOUS.toString(), R.drawable.ic_previous))
@@ -76,7 +76,7 @@ class PlaybackNotification private constructor(
             context: Context,
             notificationManager: NotificationManager,
             mediaSession: MediaSession,
-            currentSong: Song,
+            currentSong: Song?,
         ): PlaybackNotification {
             val channel = NotificationChannel(
                 NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME,

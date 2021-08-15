@@ -21,7 +21,7 @@ fun Songs(viewModel: SongsViewModel = viewModel()) {
 }
 
 @Composable
-fun SongsList(songsList: List<Song>) {
+fun SongsList(songsList: List<Song>, viewModel: SongsViewModel = viewModel()) {
     LazyColumn(
         contentPadding = rememberInsetsPaddingValues(
             insets = LocalWindowInsets.current.systemBars,
@@ -30,6 +30,7 @@ fun SongsList(songsList: List<Song>) {
     ) {
         items(songsList) { song ->
             SongsCard(modifier = Modifier.fillMaxWidth(), song = song) {
+                viewModel.playSong(song)
             }
         }
     }

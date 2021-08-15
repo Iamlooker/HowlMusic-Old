@@ -12,14 +12,15 @@ import com.looker.howlmusic.playback.PlaybackService
 import com.looker.howlmusic.utils.Constants.permission
 
 class HowlActivity : ComponentActivity() {
+    val playerService = PlaybackService()
+    var isPlaying = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val intent = Intent(this, playerService::class.java)
         super.onCreate(savedInstanceState)
-        val intent = Intent(this, PlaybackService::class.java)
+        val havePermission = checkSelfPermission(permission[0]) == PackageManager.PERMISSION_GRANTED
 
-        if (checkSelfPermission(permission[0]) == PackageManager.PERMISSION_GRANTED) {
-            startForegroundService(intent)
-        }
+        startNotification(isPlaying, havePermission, intent)
 
         setContent {
             ProvideWindowInsets {
@@ -27,5 +28,9 @@ class HowlActivity : ComponentActivity() {
             }
         }
         WindowCompat.setDecorFitsSystemWindows(window, false)
+    }
+
+    fun startNotification(isPlaying: Boolean, hasPermission: Boolean, intent: Intent) {
+        if (isPlaying && hasPermission) startForegroundService(intent)
     }
 }

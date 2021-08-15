@@ -34,7 +34,7 @@ class SongsData(private val context: Context) {
                 val albumId = songCursor.getLong(1)
                 val songName = songCursor.getString(2)
                 val artistName = songCursor.getString(3)
-                val songDurationMillis = songCursor.getInt(4)
+                val songDurationMillis = songCursor.getLong(4)
                 val songUri = songId.pathUri
                 list.add(Song(songUri, albumId, songName, artistName, songDurationMillis))
             } while (songCursor.moveToNext())
