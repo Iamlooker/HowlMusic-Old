@@ -48,16 +48,20 @@ class PlaybackService : Service() {
         startForeground(NOTIFICATION_ID, notification.build())
     }
 
-    fun initPlayer(exoPlayer: SimpleExoPlayer) {
+    private fun initPlayer(exoPlayer: SimpleExoPlayer) {
         player = exoPlayer
     }
 
-    fun initPlayer(exoPlayer: SimpleExoPlayer, songUri: Uri) {
+    fun initPlayer(exoPlayer: SimpleExoPlayer, mediaItems: ArrayList<MediaItem>) {
         initPlayer(exoPlayer)
         clearQueue()
-        setMediaItem(songUri)
+        setMediaItems(mediaItems)
         prepare()
         play()
+    }
+
+    fun setMediaItems(mediaItems: ArrayList<MediaItem>) {
+        player?.setMediaItems(mediaItems)
     }
 
     fun clearQueue() {

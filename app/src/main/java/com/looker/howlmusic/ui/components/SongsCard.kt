@@ -8,6 +8,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.looker.howlmusic.model.Song
@@ -18,12 +20,10 @@ import com.looker.howlmusic.utils.Constants.artworkUri
 fun SongsCard(
     modifier: Modifier = Modifier,
     song: Song,
-    cardHeight: Dp = 70.dp,
     onClick: (Song) -> Unit,
 ) {
     SongsItem(
         modifier = modifier.padding(10.dp),
-        cardHeight = cardHeight,
         song = song,
         onClick = onClick
     )
@@ -33,9 +33,11 @@ fun SongsCard(
 private fun SongsItem(
     modifier: Modifier = Modifier,
     song: Song,
-    cardHeight: Dp,
     onClick: (Song) -> Unit,
 ) {
+
+    val cardHeight = (LocalContext.current.resources.displayMetrics.heightPixels / 12).dp /
+            LocalDensity.current.density - 20.dp
 
     Card(
         modifier = modifier,
