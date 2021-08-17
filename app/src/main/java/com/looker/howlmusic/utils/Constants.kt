@@ -1,7 +1,10 @@
 package com.looker.howlmusic.utils
 
+import android.content.Context
 import android.net.Uri
 import android.provider.MediaStore
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
 object Constants {
 
@@ -28,9 +31,7 @@ object Constants {
     )
 
     val externalUri: Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-
     const val isMusic: String = MediaStore.Audio.Media.IS_MUSIC + " != 0"
-
     const val sortOrderAlbum: String = MediaStore.Audio.Media.ALBUM + " COLLATE NOCASE ASC"
     const val sortOrderSong: String = MediaStore.Audio.Media.TITLE + " COLLATE NOCASE ASC"
 
@@ -41,4 +42,18 @@ object Constants {
         get() = Uri.parse("$externalUri/$this")
 
     const val fadeInDuration = 500
+
+    fun itemSize(context: Context, height: Boolean, count: Int, padding: Dp = 0.dp): Dp {
+        val screenDensity = context.resources.displayMetrics.density
+        val screenHeight = context.resources.displayMetrics.heightPixels
+        val screenWidth = context.resources.displayMetrics.widthPixels
+        val itemSizeInPx = if (height) {
+            screenHeight / count
+        } else {
+            screenWidth / count
+        }
+        val itemSize = itemSizeInPx.dp / screenDensity
+
+        return itemSize - padding
+    }
 }
