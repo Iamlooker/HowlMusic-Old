@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 
 class AlbumsViewModel(application: Application) : AndroidViewModel(application) {
 
-    val albumsColumn = 2
     val albums: MutableState<MutableList<Album>> = mutableStateOf(mutableListOf())
 
     init {

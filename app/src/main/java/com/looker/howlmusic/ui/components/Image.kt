@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import coil.compose.rememberImagePainter
+import com.looker.howlmusic.R
 import com.looker.howlmusic.utils.Constants.fadeInDuration
 
 @Composable
@@ -23,6 +24,7 @@ fun HowlImage(
             data = data,
             builder = {
                 size(size)
+                error(R.drawable.empty)
                 crossfade(fadeInDuration)
             }
         ),

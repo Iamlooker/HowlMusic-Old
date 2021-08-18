@@ -6,7 +6,7 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.looker.howlmusic.data.SongsData
 import com.looker.howlmusic.model.Song
-import com.looker.howlmusic.playback.PlaybackControls.playSongs
+import com.looker.howlmusic.ui.HowlActivity
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class SongsViewModel(application: Application) : AndroidViewModel(application) {
@@ -28,6 +28,6 @@ class SongsViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun playSongs() {
-        playSongs(player, mediaItems)
+        HowlActivity().playerService.initPlayer(player, mediaItems)
     }
 }

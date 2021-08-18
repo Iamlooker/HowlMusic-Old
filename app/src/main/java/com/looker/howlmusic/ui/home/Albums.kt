@@ -10,6 +10,7 @@ import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import com.looker.howlmusic.model.Album
 import com.looker.howlmusic.ui.components.AlbumsCard
+import com.looker.howlmusic.utils.Constants.columnCount
 import com.looker.howlmusic.viewmodels.AlbumsViewModel
 
 @Composable
@@ -19,7 +20,7 @@ fun Albums(
 ) {
     Albums(
         albumsList = viewModel.albums.value,
-        columnCount = viewModel.albumsColumn,
+        columnCount = columnCount,
         onAlbumClick = onAlbumClick
     )
 }

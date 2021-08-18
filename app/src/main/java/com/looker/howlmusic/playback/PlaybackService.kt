@@ -61,7 +61,7 @@ class PlaybackService : Service() {
     }
 
     fun setMediaItems(mediaItems: ArrayList<MediaItem>) {
-        player?.setMediaItems(mediaItems)
+        player?.setMediaItems(mediaItems, true)
     }
 
     fun clearQueue() {

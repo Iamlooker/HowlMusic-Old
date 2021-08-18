@@ -15,6 +15,7 @@ import com.looker.howlmusic.model.Song
 import com.looker.howlmusic.ui.theme.Typography
 import com.looker.howlmusic.utils.Constants.artworkUri
 import com.looker.howlmusic.utils.Constants.itemSize
+import com.looker.howlmusic.utils.Constants.numberOfSongs
 
 @Composable
 fun SongsCard(
@@ -36,7 +37,7 @@ private fun SongsItem(
     onClick: (Song) -> Unit,
 ) {
 
-    val cardHeight = itemSize(LocalContext.current, true, 15)
+    val cardHeight = itemSize(LocalContext.current, true, numberOfSongs)
 
     Card(
         modifier = modifier,

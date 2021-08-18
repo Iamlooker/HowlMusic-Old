@@ -56,4 +56,7 @@ object Constants {
 
         return itemSize - padding
     }
+
+    const val columnCount = 2
+    const val numberOfSongs = 14
 }
