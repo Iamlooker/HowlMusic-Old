@@ -15,7 +15,7 @@ import com.google.accompanist.insets.statusBarsHeight
 import com.looker.howlmusic.model.Song
 import com.looker.howlmusic.ui.components.HowlImage
 import com.looker.howlmusic.ui.components.WrappedText
-import com.looker.howlmusic.ui.components.verticalGradientScrim
+import com.looker.howlmusic.ui.components.backgroundGradient
 import com.looker.howlmusic.ui.home.SongsList
 import com.looker.howlmusic.ui.theme.Typography
 import com.looker.howlmusic.utils.Constants.artworkUri
@@ -83,7 +83,7 @@ fun AlbumsView(
 
     Column(
         modifier = Modifier
-            .verticalGradientScrim(animateBackgroundGradient)
+            .backgroundGradient(animateBackgroundGradient)
             .fillMaxSize()
     ) {
         Spacer(

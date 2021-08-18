@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import kotlin.math.pow
 
 
-fun Modifier.verticalGradientScrim(
+fun Modifier.backgroundGradient(
     color: Color,
     @FloatRange(from = 0.0, to = 1.0) startYPercentage: Float = 1f,
     @FloatRange(from = 0.0, to = 1.0) endYPercentage: Float = 0f,
