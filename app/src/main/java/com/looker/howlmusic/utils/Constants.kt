@@ -35,7 +35,7 @@ object Constants {
     const val sortOrderAlbum: String = MediaStore.Audio.Media.ALBUM + " COLLATE NOCASE ASC"
     const val sortOrderSong: String = MediaStore.Audio.Media.TITLE + " COLLATE NOCASE ASC"
 
-    val Long.artworkUri: Uri
+    val Long.artworkUri: Uri?
         get() = Uri.parse("content://media/external/audio/albumart/$this")
 
     val Long.pathUri: Uri

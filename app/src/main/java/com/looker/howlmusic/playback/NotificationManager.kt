@@ -37,6 +37,7 @@ class PlaybackNotification private constructor(
         setSmallIcon(R.drawable.ic_launcher_foreground)
         setCategory(CATEGORY_SERVICE)
         setShowWhen(false)
+        setLargeIcon(currentSong?.albumId?.bitmap(context))
         setContentTitle(currentSong?.songName)
         setContentText(currentSong?.artistName)
         setContentIntent(pendingIntent)
