@@ -35,12 +35,14 @@ fun AlbumsDetails(
 
     val albumArtUri = albumId.artworkUri
 
-    AlbumsDetails(
-        albumArtUri = albumArtUri,
-        albumName = albumName,
-        artistName = artistName,
-        list = viewModel.getSongList(albumId)
-    )
+    albumArtUri?.let {
+        AlbumsDetails(
+            albumArtUri = it,
+            albumName = albumName,
+            artistName = artistName,
+            list = viewModel.getSongList(albumId)
+        )
+    }
 
 }
 
