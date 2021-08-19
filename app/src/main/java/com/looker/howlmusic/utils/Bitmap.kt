@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import com.looker.howlmusic.R
-import com.looker.howlmusic.utils.Constants.artworkUri
+import com.looker.howlmusic.utils.Extension.artworkUri
 
 object Bitmap {
 

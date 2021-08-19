@@ -13,9 +13,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.looker.howlmusic.model.Song
 import com.looker.howlmusic.ui.theme.Typography
-import com.looker.howlmusic.utils.Constants.artworkUri
 import com.looker.howlmusic.utils.Constants.itemSize
 import com.looker.howlmusic.utils.Constants.numberOfSongs
+import com.looker.howlmusic.utils.Extension.artworkUri
 
 @Composable
 fun SongsCard(

@@ -21,9 +21,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.looker.howlmusic.model.Album
 import com.looker.howlmusic.ui.theme.Typography
-import com.looker.howlmusic.utils.Constants.artworkUri
 import com.looker.howlmusic.utils.Constants.fadeInDuration
 import com.looker.howlmusic.utils.Constants.itemSize
+import com.looker.howlmusic.utils.Extension.artworkUri
 import com.looker.howlmusic.utils.rememberDominantColorState
 import kotlinx.coroutines.launch
 

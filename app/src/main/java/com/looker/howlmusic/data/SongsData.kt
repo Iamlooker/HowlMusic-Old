@@ -5,9 +5,9 @@ import android.database.Cursor
 import com.looker.howlmusic.model.Song
 import com.looker.howlmusic.utils.Constants.externalUri
 import com.looker.howlmusic.utils.Constants.isMusic
-import com.looker.howlmusic.utils.Constants.pathUri
 import com.looker.howlmusic.utils.Constants.songProjection
 import com.looker.howlmusic.utils.Constants.sortOrderSong
+import com.looker.howlmusic.utils.Extension.pathUri
 
 class SongsData(private val context: Context) {
 

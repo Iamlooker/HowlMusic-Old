@@ -18,8 +18,8 @@ import com.looker.howlmusic.ui.components.WrappedText
 import com.looker.howlmusic.ui.components.backgroundGradient
 import com.looker.howlmusic.ui.home.SongsList
 import com.looker.howlmusic.ui.theme.Typography
-import com.looker.howlmusic.utils.Constants.artworkUri
 import com.looker.howlmusic.utils.Constants.fadeInDuration
+import com.looker.howlmusic.utils.Extension.artworkUri
 import com.looker.howlmusic.utils.rememberDominantColorState
 import com.looker.howlmusic.viewmodels.AlbumsViewModel
 import kotlinx.coroutines.launch

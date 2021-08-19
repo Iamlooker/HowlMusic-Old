@@ -35,12 +35,6 @@ object Constants {
     const val sortOrderAlbum: String = MediaStore.Audio.Media.ALBUM + " COLLATE NOCASE ASC"
     const val sortOrderSong: String = MediaStore.Audio.Media.TITLE + " COLLATE NOCASE ASC"
 
-    val Long.artworkUri: Uri?
-        get() = Uri.parse("content://media/external/audio/albumart/$this")
-
-    val Long.pathUri: Uri
-        get() = Uri.parse("$externalUri/$this")
-
     const val fadeInDuration = 500
 
     fun itemSize(context: Context, height: Boolean, count: Int, padding: Dp = 0.dp): Dp {
@@ -59,4 +53,6 @@ object Constants {
 
     const val columnCount = 2
     const val numberOfSongs = 14
+
+    var isPlaying = false
 }
