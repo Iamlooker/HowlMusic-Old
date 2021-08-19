@@ -1,7 +1,6 @@
 package com.looker.howlmusic.utils
 
 import android.content.Context
-import android.graphics.BitmapFactory
 import androidx.collection.LruCache
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
@@ -11,8 +10,8 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.palette.graphics.Palette
 import coil.Coil
 import coil.request.ImageRequest
+import coil.request.SuccessResult
 import coil.size.Scale
-import com.looker.howlmusic.R
 
 @Composable
 fun rememberDominantColorState(
@@ -72,20 +71,22 @@ private suspend fun calculatePrimaryColorInImage(
         .allowHardware(false)
         .build()
 
-    val result = Coil.execute(r)
+    val bitmap = when (val result = Coil.execute(r)) {
+        is SuccessResult -> result.drawable.toBitmap()
+        else -> null
+    }
 
-    val bitmap = result.drawable?.toBitmap() ?: BitmapFactory.decodeResource(context.resources,
-        R.drawable.empty)
+    val swatch = bitmap?.let {
+        Palette.Builder(it)
+            .resizeBitmapArea(0)
+            .clearFilters()
+            .maximumColorCount(8)
+            .generate()
+    }
 
-    val swatch = Palette.Builder(bitmap)
-        .resizeBitmapArea(0)
-        .clearFilters()
-        .maximumColorCount(8)
-        .generate()
+    val vibrant = swatch?.getVibrantColor(0)
+    val dominant = swatch?.getDominantColor(0)
 
-    val vibrant = swatch.getVibrantColor(0)
-    val dominant = swatch.getDominantColor(0)
-
-    return if (vibrant == 0) Color(dominant)
-    else Color(vibrant)
+    return if (vibrant == 0) dominant?.let { Color(it) }
+    else vibrant?.let { Color(it) }
 }
