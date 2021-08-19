@@ -27,13 +27,17 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+        }
+        debug {
+            isMinifyEnabled = true
+            applicationIdSuffix = ".debug"
+        }
+        all {
+            isCrunchPngs = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android.txt"),
                 "proguard-rules.pro"
             )
-        }
-        debug{
-            applicationIdSuffix = ".debug"
         }
     }
     compileOptions {
