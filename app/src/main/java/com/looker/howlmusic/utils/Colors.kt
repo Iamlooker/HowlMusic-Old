@@ -1,6 +1,7 @@
 package com.looker.howlmusic.utils
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import androidx.collection.LruCache
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
@@ -11,6 +12,7 @@ import androidx.palette.graphics.Palette
 import coil.Coil
 import coil.request.ImageRequest
 import coil.size.Scale
+import com.looker.howlmusic.R
 
 @Composable
 fun rememberDominantColorState(
@@ -25,8 +27,8 @@ fun rememberDominantColorState(
 @Stable
 class DominantColorState(
     private val context: Context,
-    defaultColor: Color,
-    defaultOnColor: Color,
+    private val defaultColor: Color,
+    private val defaultOnColor: Color,
     cacheSize: Int = 50,
 ) {
     var color by mutableStateOf(defaultColor)
@@ -41,16 +43,18 @@ class DominantColorState(
 
     suspend fun updateColorsFromImageUrl(url: String) {
         val result = calculateDominantColor(url)
-        color = result.color
-        onColor = result.onColor
+        color = result?.color ?: defaultColor
+        onColor = result?.onColor ?: defaultOnColor
     }
 
-    private suspend fun calculateDominantColor(url: String): DominantColors {
-        return cache?.get(url) ?: DominantColors(
-            color = calculatePrimaryColorInImage(context, url),
-            onColor = calculatePrimaryColorInImage(context, url).copy(alpha = 0.4f)
-        )
-            .also { result -> cache?.put(url, result) }
+    private suspend fun calculateDominantColor(url: String): DominantColors? {
+        return cache?.get(url) ?: calculatePrimaryColorInImage(context, url)?.let { dominantColor ->
+            DominantColors(
+                color = dominantColor,
+                onColor = dominantColor.copy(alpha = 0.4f)
+            )
+                .also { result -> cache?.put(url, result) }
+        }
     }
 }
 
@@ -61,7 +65,7 @@ private data class DominantColors(val color: Color, val onColor: Color)
 private suspend fun calculatePrimaryColorInImage(
     context: Context,
     imageUrl: String,
-): Color {
+): Color? {
     val r = ImageRequest.Builder(context)
         .data(imageUrl)
         .size(128).scale(Scale.FILL)
@@ -70,7 +74,8 @@ private suspend fun calculatePrimaryColorInImage(
 
     val result = Coil.execute(r)
 
-    val bitmap = result.drawable?.toBitmap()
+    val bitmap = result.drawable?.toBitmap() ?: BitmapFactory.decodeResource(context.resources,
+        R.drawable.empty)
 
     val swatch = Palette.Builder(bitmap!!)
         .resizeBitmapArea(0)
