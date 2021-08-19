@@ -77,7 +77,7 @@ private suspend fun calculatePrimaryColorInImage(
     val bitmap = result.drawable?.toBitmap() ?: BitmapFactory.decodeResource(context.resources,
         R.drawable.empty)
 
-    val swatch = Palette.Builder(bitmap!!)
+    val swatch = Palette.Builder(bitmap)
         .resizeBitmapArea(0)
         .clearFilters()
         .maximumColorCount(8)
