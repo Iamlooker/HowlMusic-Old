@@ -1,4 +1,4 @@
-name: Build Release APK
+name: Build Debug APK
 
 on:
   workflow_dispatch:
@@ -31,7 +31,7 @@ jobs:
       - name: Build APK
         run: bash ./gradlew assembleDebug --stacktrace
 
-      - name: Send Debug APK
+      - name: Send APK
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
